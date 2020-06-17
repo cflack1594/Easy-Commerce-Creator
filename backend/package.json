@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "webpack",
-    "server": "nodemon server.js",
+    "server": "nodemon dist/main.js",
     "watch": "webpack --watch"
   },
   "keywords": [
