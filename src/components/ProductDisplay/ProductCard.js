@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
-
+import styles from "./ProductCard.css";
 export class ProductCard extends React.Component {
   static propTypes = {
     product: PropTypes.object,
@@ -19,7 +19,7 @@ export class ProductCard extends React.Component {
 
   renderCard = () => {
     return (
-      <div>
+      <div className={styles} id="ProductCard">
         <ProductImage />
         <ProductInfo />
         <QuantityController
