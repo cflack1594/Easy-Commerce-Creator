@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { Fragment } from "react";
+import { FulfillOrderForm } from "./FulfillOrderForm";
+import { NewProductForm } from "./NewProductForm";
 export class AdminPage extends React.Component {
   //Add product form
   //other DB manipulation tools
@@ -7,6 +8,12 @@ export class AdminPage extends React.Component {
   //sales tracking
 
   render() {
-    return <p>BEEP BOOP I AM A ROBOT</p>;
+    return (
+      <Fragment>
+        <NewProductForm />
+        <p>BEEP BOOP I AM A ROBOT</p>
+        <FulfillOrderForm />
+      </Fragment>
+    );
   }
 }
