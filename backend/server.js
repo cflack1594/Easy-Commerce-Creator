@@ -1,22 +1,23 @@
 import express from "express";
-import { getCollection } from "./db";
+import cors from "cors";
+import products from "./routes/api/products";
+import { getCollection } from "db";
 
 const app = express();
-const PORT = 80;
-const COLLECTION_NAMES = ["sample-products", "sample-sales"];
+const PORT = 3001;
 
 app.get("/", (_, res) =>
   res.send("<p>BEEP BOOP. Server is On. I AM A ROBOT</p>")
 );
 
+app.use(
+  cors({
+    origin: true,
+  })
+);
+
+app.use("/api/products", products);
+
 app.listen(PORT, () => {
   console.log("running on port" + PORT);
 });
-
-(async () => {
-  try {
-    console.log(await getCollection(COLLECTION_NAMES[0]));
-  } catch (e) {
-    throw new Error(e);
-  }
-})();
