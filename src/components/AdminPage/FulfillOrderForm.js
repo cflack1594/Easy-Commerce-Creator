@@ -3,14 +3,8 @@ export class FulfillOrderForm extends React.Component {
   state = {
     orders: [
       {
-        orderID: 1,
-        value: "BEEP",
-        saleData: {},
-      },
-      {
-        orderID: 2,
-        value: "BOOP",
-        saleData: {},
+        orderId: 0,
+        value: "Beep",
       },
     ],
 
@@ -35,15 +29,31 @@ export class FulfillOrderForm extends React.Component {
 
   createOrderForms = (orders) => {
     return orders.length ? (
-      orders.map((order, index) => (
-        <form id={order.orderID} key={index}>
-          <input
-            type="string"
-            id="newOrder"
-            name="newOrder"
-            value={order.value}
-            readOnly
-          ></input>
+      <table>
+        <thead>
+          <tr>
+            <th>Orders To Complete</th>
+          </tr>
+        </thead>
+        <tbody>{this.makeOrderMarkup(orders)}</tbody>
+      </table>
+    ) : (
+      <table>
+        <thead>
+          <tr>
+            <th>No Orders to complete</th>
+          </tr>
+        </thead>
+      </table>
+    );
+  };
+
+  makeOrderMarkup = (orders) => {
+    return orders.map((order, index) => (
+      <tr key={index}>
+        <td>{order.orderID}</td>
+        <td>{order.value}</td>
+        <td>
           <button
             id="fulfillOrder"
             name="fulfillOrder"
@@ -54,11 +64,9 @@ export class FulfillOrderForm extends React.Component {
           >
             Fulfill Order
           </button>
-        </form>
-      ))
-    ) : (
-      <p>No Orders to complete</p>
-    );
+        </td>
+      </tr>
+    ));
   };
 
   render() {
