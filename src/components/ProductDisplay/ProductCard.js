@@ -17,11 +17,11 @@ export class ProductCard extends React.Component {
     this.setState({ quantity: Number.parseInt(newVal) });
   };
 
-  renderCard = () => {
+  createProductCard = (product) => {
     return (
       <div className={styles} id="ProductCard">
         <ProductImage />
-        {ProductInfo(this.props.product)}
+        {ProductInfo(product)}
         <QuantityController
           quantity={this.state.quantity}
           quantChange={this.quantityChanger}
@@ -31,7 +31,7 @@ export class ProductCard extends React.Component {
   };
 
   render() {
-    return this.renderCard();
+    return this.createProductCard(this.state.product);
   }
 }
 
