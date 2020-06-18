@@ -15,7 +15,6 @@ export class AdminPage extends React.Component {
     return (
       <Fragment>
         <NewProductForm addProduct={this.props.addProduct} />
-        <p>BEEP BOOP I AM A ROBOT</p>
         <FulfillOrderForm />
       </Fragment>
     );
