@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
-
+import styles from "./ProductCard.css";
 export class ProductCard extends React.Component {
   static propTypes = {
     product: PropTypes.object,
@@ -17,11 +17,11 @@ export class ProductCard extends React.Component {
     this.setState({ quantity: Number.parseInt(newVal) });
   };
 
-  renderCard = () => {
+  createProductCard = (product) => {
     return (
-      <div>
+      <div className={styles} id="ProductCard">
         <ProductImage />
-        <ProductInfo />
+        {ProductInfo(product)}
         <QuantityController
           quantity={this.state.quantity}
           quantChange={this.quantityChanger}
@@ -31,7 +31,7 @@ export class ProductCard extends React.Component {
   };
 
   render() {
-    return this.renderCard();
+    return this.createProductCard(this.state.product);
   }
 }
 

@@ -2,9 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "server": "nodemon server.mjs"
+    "build": "webpack",
+    "server": "nodemon dist/main.js",
+    "watch": "webpack --watch"
   },
   "keywords": [
     "express",

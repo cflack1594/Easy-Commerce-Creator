@@ -14,7 +14,6 @@ export class QuantityController extends React.Component {
   };
 
   handleChange = (value) => {
-    if (value < 0) Number.parseInt((value = 0));
     this.props.quantChange(Number.parseInt(value));
   };
 
@@ -26,6 +25,8 @@ export class QuantityController extends React.Component {
           type="number"
           name="quantity"
           value={this.props.quantity}
+          min="0"
+          step="1"
           id="quantity"
           onChange={(e) => this.handleChange(e.target.value)}
         ></input>

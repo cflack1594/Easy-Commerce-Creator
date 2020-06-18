@@ -4,8 +4,8 @@ import React from "react";
 import { ProductCard } from "./ProductCard";
 
 export class ProductDisplay extends React.Component {
-  state = {
-    products: [{ number: 0 }, { number: 1 }],
+  static propTypes = {
+    products: PropTypes.array,
   };
 
   createProductCards = (products) =>
@@ -14,6 +14,6 @@ export class ProductDisplay extends React.Component {
     ));
 
   render() {
-    return this.createProductCards(this.state.products);
+    return this.createProductCards(this.props.products);
   }
 }

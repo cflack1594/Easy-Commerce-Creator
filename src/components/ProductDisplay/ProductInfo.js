@@ -1,3 +1,8 @@
 import React from "react";
 
-export const ProductInfo = () => <p>Product Info Here</p>;
+export const ProductInfo = (product) =>
+  Object.keys(product).map((activeKey, index) => (
+    <p key={index}>
+      {activeKey} : {product.activeKey}
+    </p>
+  ));
