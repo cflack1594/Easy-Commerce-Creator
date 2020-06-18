@@ -1,22 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FormInput } from "./FormInput";
-import { SubmitButton } from "./SubmitButton";
-
 export class NewProductForm extends React.Component {
   static propTypes = {
     addProduct: PropTypes.func,
   };
 
+  handleClick = (target) => {
+    this.createProduct(
+      document.getElementById("NewProductForm").querySelectorAll("input")
+    );
+  };
   createProduct = (inputs) => {
-    return Array.from(inputs).reduce(
+    const newProduct = Array.from(inputs).reduce(
       (acc, input) => (acc = { ...acc, ...{ [input.name]: input.value } }),
       {}
     );
-  };
 
-  handleClick = () => {
-    const newProduct = this.createProduct(document.querySelectorAll("input"));
     this.props.addProduct(newProduct);
   };
 
@@ -25,7 +25,7 @@ export class NewProductForm extends React.Component {
     { name: "Price", type: "number" },
     { name: "Stock", type: "number" },
     { name: "Description", type: "string" },
-    { name: "Image", type: "image" },
+    { name: "Image", type: "file" },
   ];
 
   formInputs = this.inputKeys.map((input, index) => (
@@ -34,7 +34,7 @@ export class NewProductForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form id="NewProductForm">
         {this.formInputs}
         <button
           type="submit"
@@ -46,7 +46,6 @@ export class NewProductForm extends React.Component {
         >
           Submit
         </button>
-        {/* <SubmitButton /> */}
       </form>
     );
   }
