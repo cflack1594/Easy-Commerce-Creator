@@ -1,12 +1,7 @@
 import React from "react";
 export class FulfillOrderForm extends React.Component {
   state = {
-    orders: [
-      {
-        orderId: 0,
-        value: "Beep",
-      },
-    ],
+    orders: [],
 
     sales: [],
   };

@@ -1,11 +1,26 @@
 import React from "react";
 import "./App.css";
 import * as components from "components";
+import * as api from "api";
 
 //add state proxy for components to work with
 export class App extends React.Component {
   state = {
     products: [],
+  };
+
+  componentDidMount() {
+    const products = this.state.products.concat(this.getProducts());
+    this.setState({ products: products });
+  }
+  getProducts = async () => {
+    try {
+      const resp = await api.getProducts();
+      console.log(resp);
+      return;
+    } catch (e) {
+      throw new Error(e);
+    }
   };
 
   addProduct = (newProduct) => {
@@ -14,7 +29,6 @@ export class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.products);
     return (
       <div className="App">
         {components.Header()}
