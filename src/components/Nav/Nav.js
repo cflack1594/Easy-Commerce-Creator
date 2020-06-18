@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./Nav.css";
 export class Nav extends React.Component {
   links = ["Home", "About", "Login", "Cart"];
 
@@ -11,6 +11,6 @@ export class Nav extends React.Component {
     ));
 
   render() {
-    return <ul>{this.createNavBar()}</ul>;
+    return <ul className={styles}>{this.createNavBar()}</ul>;
   }
 }
