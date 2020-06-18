@@ -8,13 +8,13 @@ export class FormInput extends React.Component {
 
   render() {
     return (
-      <div>
-        <label>{this.props.inputKeys.name}</label>
-        <input
-          type={this.props.inputKeys.type}
-          name={this.props.inputKeys.name}
-        ></input>
-      </div>
+      // <div>
+      //   <label>{this.props.inputKeys.name}</label>
+      <input
+        type={this.props.inputKeys.type}
+        name={this.props.inputKeys.name}
+      ></input>
+      // </div>
     );
   }
 }

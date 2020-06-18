@@ -1,8 +1,25 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormInput } from "./FormInput";
 import { SubmitButton } from "./SubmitButton";
 
 export class NewProductForm extends React.Component {
+  static propTypes = {
+    addProduct: PropTypes.func,
+  };
+
+  createProduct = (inputs) => {
+    return Array.from(inputs).reduce(
+      (acc, input) => (acc = { ...acc, ...{ [input.name]: input.value } }),
+      {}
+    );
+  };
+
+  handleClick = () => {
+    const newProduct = this.createProduct(document.querySelectorAll("input"));
+    this.props.addProduct(newProduct);
+  };
+
   inputKeys = [
     { name: "Name", type: "string" },
     { name: "Price", type: "number" },
@@ -19,7 +36,17 @@ export class NewProductForm extends React.Component {
     return (
       <form>
         {this.formInputs}
-        <SubmitButton />
+        <button
+          type="submit"
+          name="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            this.handleClick();
+          }}
+        >
+          Submit
+        </button>
+        {/* <SubmitButton /> */}
       </form>
     );
   }

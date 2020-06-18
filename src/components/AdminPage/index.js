@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { FulfillOrderForm } from "./FulfillOrderForm";
 import { NewProductForm } from "./NewProductForm";
 export class AdminPage extends React.Component {
@@ -6,11 +7,14 @@ export class AdminPage extends React.Component {
   //other DB manipulation tools
   //order fulfillment
   //sales tracking
+  static propTypes = {
+    addProduct: PropTypes.func,
+  };
 
   render() {
     return (
       <Fragment>
-        <NewProductForm />
+        <NewProductForm addProduct={this.props.addProduct} />
         <p>BEEP BOOP I AM A ROBOT</p>
         <FulfillOrderForm />
       </Fragment>
