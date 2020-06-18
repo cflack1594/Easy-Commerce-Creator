@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { FulfillOrderForm } from "./FulfillOrderForm";
 import { NewProductForm } from "./NewProductForm";
+import styles from "./Form.css";
 export class AdminPage extends React.Component {
   //Add product form
   //other DB manipulation tools
@@ -13,10 +14,10 @@ export class AdminPage extends React.Component {
 
   render() {
     return (
-      <Fragment>
+      <div className={styles}>
         <NewProductForm addProduct={this.props.addProduct} />
         <FulfillOrderForm />
-      </Fragment>
+      </div>
     );
   }
 }

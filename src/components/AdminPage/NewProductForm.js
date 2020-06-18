@@ -35,6 +35,7 @@ export class NewProductForm extends React.Component {
   render() {
     return (
       <form id="NewProductForm">
+        <p>Creat New Product</p>
         {this.formInputs}
         <button
           type="submit"
