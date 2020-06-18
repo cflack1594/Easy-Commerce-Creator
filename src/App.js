@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import * as components from "components";
 
+//add state proxy for components to work with
 export class App extends React.Component {
   state = {
     products: [],

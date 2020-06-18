@@ -21,7 +21,7 @@ export class ProductCard extends React.Component {
     return (
       <div className={styles} id="ProductCard">
         <ProductImage />
-        <ProductInfo />
+        {ProductInfo(this.props.product)}
         <QuantityController
           quantity={this.state.quantity}
           quantChange={this.quantityChanger}
