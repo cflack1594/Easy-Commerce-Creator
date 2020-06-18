@@ -7,7 +7,6 @@ export const getCollection = async (collectionName) => {
       .db("ecommerce-site-demo")
       .collection(collectionName)
       .find();
-
     return await cursor.toArray();
   } catch (e) {
     throw new Error(e);
