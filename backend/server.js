@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import products from "./routes/api/products";
-import { getCollection } from "db";
+import sales from "./routes/api/sales";
 
 const app = express();
 const PORT = 3001;
@@ -17,6 +17,7 @@ app.use(
 );
 
 app.use("/api/products", products);
+app.use("/api/sales", sales);
 
 app.listen(PORT, () => {
   console.log("running on port " + PORT);
