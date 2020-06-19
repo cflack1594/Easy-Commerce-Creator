@@ -10,8 +10,12 @@ export const client = new MongoClient(process.env.ATLAS_URI, {
 (async () => {
   await client.connect();
 
-  process.on("SIGINT", async () => {
-    await client.close();
-    process.exit(0);
+  process.on("SIGINT", () => {
+    client
+      .close()
+      .then(() => {
+        process.exit(0);
+      })
+      .catch((err) => console.error("Failed to fetch"));
   });
 })();
