@@ -29,7 +29,7 @@ export class NewProductForm extends React.Component {
   ];
 
   formInputs = this.inputKeys.map((input, index) => (
-    <FormInput key={index} inputKeys={input} />
+    <FormInput key={index} type={input.type} name={input.name} />
   ));
 
   render() {
