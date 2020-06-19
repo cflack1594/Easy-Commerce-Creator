@@ -7,12 +7,24 @@ import * as api from "api";
 export class App extends React.Component {
   state = {
     products: [],
+    sales: [],
   };
 
   async componentDidMount() {
     const products = this.state.products.concat(await this.getProducts());
-    this.setState({ products: products });
+    const sales = this.state.sales.concat(await this.getSales());
+    this.setState({ products: products, sales: sales });
   }
+
+  getSales = async () => {
+    try {
+      const resp = await api.getSales();
+      return resp;
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
   getProducts = async () => {
     try {
       const resp = await api.getProducts();
