@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FulfillOrderForm } from "./FulfillOrderForm";
+import { FulfillOrderTable } from "./FulfillOrderTable";
 import { NewProductForm } from "./NewProductForm";
 import styles from "./Form.css";
 export class AdminPage extends React.Component {
@@ -16,7 +16,7 @@ export class AdminPage extends React.Component {
     return (
       <div className={styles}>
         <NewProductForm addProduct={this.props.addProduct} />
-        <FulfillOrderForm />
+        <FulfillOrderTable />
       </div>
     );
   }

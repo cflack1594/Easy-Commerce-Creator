@@ -1,12 +1,9 @@
 import React from "react";
-export class FulfillOrderForm extends React.Component {
+import PropTypes from "prop-types";
+
+export class FulfillOrderTable extends React.Component {
   state = {
-    orders: [
-      {
-        orderId: 0,
-        value: "Beep",
-      },
-    ],
+    orders: [],
 
     sales: [],
   };
