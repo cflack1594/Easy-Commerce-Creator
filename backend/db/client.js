@@ -16,6 +16,6 @@ export const client = new MongoClient(process.env.ATLAS_URI, {
       .then(() => {
         process.exit(0);
       })
-      .catch((err) => console.error("Failed to fetch"));
+      .catch((err) => console.error(err));
   });
 })();
