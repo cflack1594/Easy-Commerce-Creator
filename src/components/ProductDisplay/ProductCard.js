@@ -20,7 +20,7 @@ export class ProductCard extends React.Component {
   createProductCard = (product) => {
     return (
       <div className={styles} id="ProductCard">
-        <ProductImage />
+        {ProductImage(product.image)}
         {ProductInfo(product)}
         <QuantityController
           quantity={this.state.quantity}
@@ -31,7 +31,7 @@ export class ProductCard extends React.Component {
   };
 
   render() {
-    return this.createProductCard(this.state.product);
+    return this.createProductCard(this.props.product);
   }
 }
 

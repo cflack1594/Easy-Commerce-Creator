@@ -9,15 +9,14 @@ export class App extends React.Component {
     products: [],
   };
 
-  componentDidMount() {
-    const products = this.state.products.concat(this.getProducts());
+  async componentDidMount() {
+    const products = this.state.products.concat(await this.getProducts());
     this.setState({ products: products });
   }
   getProducts = async () => {
     try {
       const resp = await api.getProducts();
-      console.log(resp);
-      return;
+      return resp;
     } catch (e) {
       throw new Error(e);
     }
