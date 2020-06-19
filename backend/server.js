@@ -19,5 +19,5 @@ app.use(
 app.use("/api/products", products);
 
 app.listen(PORT, () => {
-  console.log("running on port" + PORT);
+  console.log("running on port " + PORT);
 });
