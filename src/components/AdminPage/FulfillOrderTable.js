@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import styles from "./FulfillTable.css";
 export class FulfillOrderTable extends React.Component {
   state = {
     orders: [],
@@ -26,7 +26,7 @@ export class FulfillOrderTable extends React.Component {
 
   createOrderForms = (orders) => {
     return orders.length ? (
-      <table>
+      <table className={styles}>
         <thead>
           <tr>
             <th>Orders To Complete</th>

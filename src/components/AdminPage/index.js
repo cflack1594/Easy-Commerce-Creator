@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FulfillOrderTable } from "./FulfillOrderTable";
 import { NewProductForm } from "./NewProductForm";
-import styles from "./Form.css";
+import styles from "./AdminPage.css";
 export class AdminPage extends React.Component {
   //Add product form
   //other DB manipulation tools
@@ -14,7 +14,7 @@ export class AdminPage extends React.Component {
 
   render() {
     return (
-      <div className={styles}>
+      <div id="AdminPage" className={styles}>
         <NewProductForm addProduct={this.props.addProduct} />
         <FulfillOrderTable />
       </div>

@@ -11,6 +11,10 @@ export class Nav extends React.Component {
     ));
 
   render() {
-    return <ul className={styles}>{this.createNavBar()}</ul>;
+    return (
+      <ul id="#nav" className={styles}>
+        {this.createNavBar()}
+      </ul>
+    );
   }
 }
