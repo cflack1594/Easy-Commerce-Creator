@@ -11,4 +11,6 @@ router.get("/products", async (_, res) => {
   res.json(await getCollection("sample-products"));
 });
 
+router.post("/products", async (_, res) => {});
+
 export default router;
