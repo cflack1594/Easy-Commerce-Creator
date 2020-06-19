@@ -13,6 +13,7 @@ export class FormInput extends React.Component {
       <input
         type={this.props.inputKeys.type}
         name={this.props.inputKeys.name}
+        placeholder={this.props.inputKeys.name}
       ></input>
       // </div>
     );
