@@ -2,34 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./FulfillTable.css";
 export class FulfillOrderTable extends React.Component {
-  state = {
-    orders: [],
-
-    sales: [],
+  static propTypes = {
+    orders: PropTypes.array,
+    addOrder: PropTypes.func,
+    updateOrders: PropTypes.func,
+    updateSales: PropTypes.func,
   };
 
   handleClick = (order, orders) => {
-    this.updateOrders(order.orderID, orders);
-    this.updatedSales(order);
+    this.props.updateOrders(order.orderID, orders);
+    this.props.updateSales(order);
   };
 
-  //uses the orderID key to find the order within the state array
-  updateOrders = (orderID, orders) => {
-    const updatedOrders = orders.filter((order) => order.orderID !== orderID);
-    this.setState({ orders: updatedOrders });
-  };
-
-  updatedSales = (order) => {
-    const updatedSales = this.state.sales.concat(order);
-    this.setState({ sales: updatedSales });
-  };
-
-  createOrderForms = (orders) => {
+  createOrderDisplayTable = (orders) => {
     return orders.length ? (
       <table className={styles}>
         <thead>
           <tr>
-            <th>Orders To Complete</th>
+            <th>Orders ID</th>
+            <th>Value</th>
           </tr>
         </thead>
         <tbody>{this.makeOrderMarkup(orders)}</tbody>
@@ -48,8 +39,8 @@ export class FulfillOrderTable extends React.Component {
   makeOrderMarkup = (orders) => {
     return orders.map((order, index) => (
       <tr key={index}>
-        <td>{order.orderID}</td>
-        <td>{order.value}</td>
+        <td name="orderID">{order.orderId}</td>
+        <td name="value">{order.value}</td>
         <td>
           <button
             id="fulfillOrder"
@@ -67,6 +58,6 @@ export class FulfillOrderTable extends React.Component {
   };
 
   render() {
-    return this.createOrderForms(this.state.orders);
+    return this.createOrderDisplayTable(this.props.orders);
   }
 }
