@@ -7,10 +7,10 @@ router.get("/test", (_, res) => {
   res.send("<p>Products Router testing</p>");
 });
 
-router.get("/products", async (_, res) => {
-  res.json(await getCollection("sample-products"));
+router.get("/auth", async (_, res) => {
+  res.json(await getCollection("sample-auth"));
 });
 
-router.post("/products", async (req, res) => {});
+router.post("/auth", async (req, res) => {});
 
 export default router;
