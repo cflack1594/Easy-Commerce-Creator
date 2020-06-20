@@ -10,7 +10,6 @@ export class FormInput extends React.Component {
   render() {
     return (
       <div>
-        <label>{this.props.name}</label>
         <input
           type={this.props.type}
           name={this.props.name}
