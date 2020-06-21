@@ -8,16 +8,11 @@ import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 export class App extends React.Component {
   state = {
     auth: [],
-    cart: [
-      {
-        orderId: 0,
-        value: "Boop",
-      },
-    ],
+    cart: [],
     products: [],
     orders: [],
     sales: [],
-    loggedIn: true,
+    loggedIn: false,
     activePage: "Home",
   };
 
@@ -45,7 +40,18 @@ export class App extends React.Component {
   };
 
   addOrder = (newOrder) => {
-    this.setState({ orders: [...this.state.orders, ...newOrder] });
+    let i = 0;
+    const order = newOrder.reduce((acc, current) => {
+      acc.price
+        ? (acc.price += Number.parseInt(current.price * current.quantity))
+        : (acc.price = Number.parseInt(current.price * current.quantity));
+      acc.value
+        ? acc.value.push({ name: current.name, quantity: current.quantity })
+        : (acc.value = [{ name: current.name, quantity: current.quantity }]);
+
+      return acc;
+    }, {});
+    this.setState({ orders: [...this.state.orders, order] });
     this.setState({ cart: [] });
   };
 
@@ -88,7 +94,13 @@ export class App extends React.Component {
 
     switch (page) {
       case "Cart":
-        ret = <Cart addOrder={this.addOrder} cart={this.state.cart} />;
+        ret = (
+          <Cart
+            addOrder={this.addOrder}
+            cart={this.state.cart}
+            sales={this.state.sales}
+          />
+        );
         break;
       case "Home":
         ret = (

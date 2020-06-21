@@ -4,15 +4,18 @@ export class Cart extends React.Component {
   static propTypes = {
     addOrder: PropTypes.func,
     cart: PropTypes.array,
+    sales: PropTypes.array,
   };
+
+  orderID = this.props.sales.length;
 
   handleClick = () => {
     this.props.addOrder(this.props.cart);
   };
 
-  createCartItem = (cartItem) => {
+  createCartItem = (cartItem, index) => {
     return (
-      <div>
+      <div key={index}>
         {Object.keys(cartItem).map((target, index) => (
           <p key={index}>
             {target} : {cartItem[target]}
@@ -24,14 +27,14 @@ export class Cart extends React.Component {
 
   render() {
     return this.props.cart.length ? (
-      this.props.cart.map((cartItem, index) => (
-        <div key={index}>
-          {this.createCartItem(cartItem)}
-          <button type="button" name="checkout" onClick={this.handleClick}>
-            Checkout
-          </button>
-        </div>
-      ))
+      <div>
+        {this.props.cart.map((cartItem, index) =>
+          this.createCartItem(cartItem, index)
+        )}
+        <button type="button" name="checkout" onClick={this.handleClick}>
+          Checkout
+        </button>
+      </div>
     ) : (
       <p>Nothing In Cart</p>
     );

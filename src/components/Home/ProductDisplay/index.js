@@ -13,6 +13,7 @@ export class ProductDisplay extends React.Component {
     products.map((product, index) => (
       <ProductCard
         key={index}
+        index={index}
         product={product}
         addToCart={this.props.addToCart}
       />

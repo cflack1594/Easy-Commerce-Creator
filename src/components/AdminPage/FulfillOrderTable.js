@@ -20,6 +20,7 @@ export class FulfillOrderTable extends React.Component {
         <thead>
           <tr>
             <th>Order ID</th>
+            <th>Price</th>
             <th>Value</th>
           </tr>
         </thead>
@@ -39,8 +40,9 @@ export class FulfillOrderTable extends React.Component {
   makeOrderMarkup = (orders) => {
     return orders.map((order, index) => (
       <tr key={index}>
-        <td name="orderID">{order.orderId}</td>
-        <td name="value">{order.value}</td>
+        <td name="orderID">{index}</td>
+        <td name="price">{order.price}</td>
+        <td name="value">stuff</td>
         <td>
           <button
             id="fulfillOrder"
@@ -58,6 +60,7 @@ export class FulfillOrderTable extends React.Component {
   };
 
   render() {
+    console.log(this.props.orders);
     return this.createOrderDisplayTable(this.props.orders);
   }
 }

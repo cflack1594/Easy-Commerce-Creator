@@ -4,23 +4,26 @@ import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
 import styles from "./ProductCard.css";
+import { processFormData } from "utils";
 export class ProductCard extends React.Component {
   static propTypes = {
     addToCart: PropTypes.func,
     product: PropTypes.object,
+    index: PropTypes.number,
   };
 
   state = {
     quantity: 0,
   };
 
-  order = {
-    orderId: 0,
-    value: "boop",
-  };
-
   handleClick = () => {
-    this.props.addToCart();
+    const order = {
+      name: this.props.product.name,
+      price: this.props.product.price,
+      quantity: this.state.quantity,
+    };
+
+    if (this.state.quantity) this.props.addToCart(order);
   };
 
   quantityChanger = (newVal) => {
@@ -29,16 +32,18 @@ export class ProductCard extends React.Component {
 
   createProductCard = (product) => {
     return (
-      <div id="ProductCard" className={styles}>
-        {/* {ProductImage(product.image)} */}
-        {ProductInfo(product)}
-        <QuantityController
-          quantity={this.state.quantity}
-          quantChange={this.quantityChanger}
-        />
-        <button name="addToCart" id="addToCart" onClick={this.handleClick}>
-          Add To Cart
-        </button>
+      <div id="ProductCard">
+        <div id={this.props.index} className={styles}>
+          {/* {ProductImage(product.image)} */}
+          {ProductInfo(product)}
+          <QuantityController
+            quantity={this.state.quantity}
+            quantChange={this.quantityChanger}
+          />
+          <button name="addToCart" id="addToCart" onClick={this.handleClick}>
+            Add To Cart
+          </button>
+        </div>
       </div>
     );
   };
