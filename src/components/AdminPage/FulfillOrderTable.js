@@ -19,7 +19,7 @@ export class FulfillOrderTable extends React.Component {
       <table className={styles}>
         <thead>
           <tr>
-            <th>Orders ID</th>
+            <th>Order ID</th>
             <th>Value</th>
           </tr>
         </thead>

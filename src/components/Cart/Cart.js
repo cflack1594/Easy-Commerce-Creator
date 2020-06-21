@@ -1,17 +1,13 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 export class Cart extends React.Component {
   static propTypes = {
     addOrder: PropTypes.func,
-  };
-
-  state = {
-    cartItems: [{ orderId: "0", value: "boooop" }],
-    showCart: true,
+    cart: PropTypes.array,
   };
 
   handleClick = () => {
-    this.props.addOrder(this.state.cartItems);
+    this.props.addOrder(this.props.cart);
     this.setState({ cartItems: [] });
   };
 
@@ -28,15 +24,17 @@ export class Cart extends React.Component {
   };
 
   render() {
-    return this.state.showCart
-      ? this.state.cartItems.map((cartItem, index) => (
-          <div key={index}>
-            {this.createCartItem(cartItem)}
-            <button type="button" name="checkout" onClick={this.handleClick}>
-              Checkout
-            </button>
-          </div>
-        ))
-      : null;
+    return this.state.cart.length ? (
+      this.props.cart.map((cartItem, index) => (
+        <div key={index}>
+          {this.createCartItem(cartItem)}
+          <button type="button" name="checkout" onClick={this.handleClick}>
+            Checkout
+          </button>
+        </div>
+      ))
+    ) : (
+      <p>Nothing In Cart</p>
+    );
   }
 }

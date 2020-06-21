@@ -1,16 +1,19 @@
 import React from "react";
 import "./App.css";
-import * as components from "components";
+import { Home, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
-
+import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 //add state proxy for components to work with
+
 export class App extends React.Component {
   state = {
     auth: [],
+    cart: [],
     products: [],
     orders: [],
     sales: [],
-    loggedIn: false,
+    loggedIn: true,
+    activePage: "Home",
   };
 
   async componentDidMount() {
@@ -31,24 +34,6 @@ export class App extends React.Component {
       throw Error(e);
     }
   };
-
-  // getSales = async () => {
-  //   try {
-  //     const resp = await api.getSales();
-  //     return resp;
-  //   } catch (e) {
-  //     throw new Error(e);
-  //   }
-  // };
-
-  // getProducts = async () => {
-  //   try {
-  //     const resp = await api.getProducts();
-  //     return resp;
-  //   } catch (e) {
-  //     throw new Error(e);
-  //   }
-  // };
 
   addProduct = (newProduct) => {
     this.setState({ products: [...this.state.products, newProduct] });
@@ -73,9 +58,13 @@ export class App extends React.Component {
     this.setState({ loggedIn: status });
   };
 
+  goToPage = (link) => {
+    this.setState({ activePage: link });
+  };
+
   checkLoginStatus = () =>
     this.state.loggedIn ? (
-      <components.AdminPage
+      <AdminPage
         addProduct={this.addProduct}
         addOrder={this.addOrder}
         updateOrders={this.updateOrders}
@@ -85,21 +74,85 @@ export class App extends React.Component {
       />
     ) : null;
 
+  checkPage = (page) => {
+    let ret;
+
+    switch (page) {
+      case "Cart":
+        ret = <Cart addOrder={this.addOrder} orders={this.state.cart} />;
+        break;
+      case "Home":
+        ret = (
+          <Home
+            products={this.state.products}
+            addOrder={this.addOrder}
+            addToCart={this.addToCart()}
+          />
+        );
+        break;
+      case "Login":
+        ret = (
+          <div>
+            <Login
+              auth={this.state.auth}
+              login={this.login}
+              loggedIn={this.state.loggedIn}
+            />
+            {this.checkLoginStatus()}
+          </div>
+        );
+        break;
+      default:
+        ret = <h1>Page Not Found</h1>;
+        break;
+    }
+
+    return ret;
+  };
+
   render() {
     return (
       <div className="App">
-        {components.Header()}
-        <components.Login
-          auth={this.state.auth}
-          login={this.login}
-          loggedIn={this.state.loggedIn}
-        />
-        <components.Nav />
-        <components.Cart addOrder={this.addOrder} />
-        <components.ProductDisplay products={this.state.products} />
-        {this.checkLoginStatus()}
-        <components.Nav />
+        <Nav goToPage={this.goToPage} />
+        {this.checkPage(this.state.activePage)}
+        <Nav goToPage={this.goToPage} />
       </div>
     );
   }
 }
+
+//routing = (
+//   <Router>
+//     <div>
+//       <ul>
+//         <li>
+//           <Link to="/" component={App}>
+//             Home
+//           </Link>
+//         </li>
+//         <li>
+//           <Link
+//             to={{
+//               pathname: "/login",
+//               props: {
+//                 auth: this.state.auth,
+//                 login: this.login,
+//                 loggedIn: this.state.loggedIn,
+//               },
+//             }}
+//           >
+//             Login
+//           </Link>
+//         </li>
+//         <li>
+//           <Link to="/Admin">Admin</Link>
+//         </li>
+//       </ul>
+//       <Switch>
+//         <Route path="/" component={this} />
+//         <Route path="/Login" component={components.Login} />
+//         <Route path="/Admin" component={components.AdminPage} />
+//       </Switch>
+//     </div>
+//   </Router>
+// );
