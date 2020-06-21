@@ -6,11 +6,21 @@ import { QuantityController } from "./QuantityController";
 import styles from "./ProductCard.css";
 export class ProductCard extends React.Component {
   static propTypes = {
+    addToCart: PropTypes.func,
     product: PropTypes.object,
   };
 
   state = {
     quantity: 0,
+  };
+
+  order = {
+    orderId: 0,
+    value: "boop",
+  };
+
+  handleClick = () => {
+    this.props.addToCart();
   };
 
   quantityChanger = (newVal) => {
@@ -26,6 +36,9 @@ export class ProductCard extends React.Component {
           quantity={this.state.quantity}
           quantChange={this.quantityChanger}
         />
+        <button name="addToCart" id="addToCart" onClick={this.handleClick}>
+          Add To Cart
+        </button>
       </div>
     );
   };

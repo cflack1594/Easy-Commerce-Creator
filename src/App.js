@@ -8,7 +8,12 @@ import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 export class App extends React.Component {
   state = {
     auth: [],
-    cart: [],
+    cart: [
+      {
+        orderId: 0,
+        value: "Boop",
+      },
+    ],
     products: [],
     orders: [],
     sales: [],
@@ -41,10 +46,14 @@ export class App extends React.Component {
 
   addOrder = (newOrder) => {
     this.setState({ orders: [...this.state.orders, ...newOrder] });
+    this.setState({ cart: [] });
+  };
+
+  addToCart = (order) => {
+    this.setState({ cart: [...this.state.cart, order] });
   };
 
   //uses the orderID key to find and remove the fulfilled order within the state array
-
   updateOrders = (orderID, orders) => {
     const updatedOrders = orders.filter((order) => order.orderID !== orderID);
     this.setState({ orders: updatedOrders });
@@ -79,14 +88,14 @@ export class App extends React.Component {
 
     switch (page) {
       case "Cart":
-        ret = <Cart addOrder={this.addOrder} orders={this.state.cart} />;
+        ret = <Cart addOrder={this.addOrder} cart={this.state.cart} />;
         break;
       case "Home":
         ret = (
           <Home
             products={this.state.products}
             addOrder={this.addOrder}
-            addToCart={this.addToCart()}
+            addToCart={this.addToCart}
           />
         );
         break;

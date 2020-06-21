@@ -5,12 +5,17 @@ import styles from "./ProductList.css";
 
 export class ProductDisplay extends React.Component {
   static propTypes = {
+    addToCart: PropTypes.func,
     products: PropTypes.array,
   };
 
   createProductCards = (products) =>
     products.map((product, index) => (
-      <ProductCard key={index} product={product} />
+      <ProductCard
+        key={index}
+        product={product}
+        addToCart={this.props.addToCart}
+      />
     ));
 
   render() {

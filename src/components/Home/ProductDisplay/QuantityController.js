@@ -3,14 +3,8 @@ import PropTypes from "prop-types";
 
 export class QuantityController extends React.Component {
   static propTypes = {
-    addToCart: PropTypes.func,
     quantChange: PropTypes.func,
     quantity: PropTypes.number,
-  };
-
-  handleClick = () => {
-    //this.props.addToCart();
-    //needs context add to Cart
   };
 
   handleChange = (value) => {
@@ -30,13 +24,6 @@ export class QuantityController extends React.Component {
           id="quantity"
           onChange={(e) => this.handleChange(e.target.value)}
         ></input>
-        <button
-          name="addToCart"
-          id="addToCart"
-          onClick={() => this.handleClick()}
-        >
-          Add To Cart
-        </button>
       </Fragment>
     );
   }

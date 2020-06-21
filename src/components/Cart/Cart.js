@@ -8,7 +8,6 @@ export class Cart extends React.Component {
 
   handleClick = () => {
     this.props.addOrder(this.props.cart);
-    this.setState({ cartItems: [] });
   };
 
   createCartItem = (cartItem) => {
@@ -24,7 +23,7 @@ export class Cart extends React.Component {
   };
 
   render() {
-    return this.state.cart.length ? (
+    return this.props.cart.length ? (
       this.props.cart.map((cartItem, index) => (
         <div key={index}>
           {this.createCartItem(cartItem)}
