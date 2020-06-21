@@ -9,8 +9,8 @@ export class FulfillOrderTable extends React.Component {
     updateSales: PropTypes.func,
   };
 
-  handleClick = (order, orders) => {
-    this.props.updateOrders(order.orderID, orders);
+  handleClick = (order, orders, orderId) => {
+    this.props.updateOrders(orderId, orders);
     this.props.updateSales(order);
   };
 
@@ -49,7 +49,7 @@ export class FulfillOrderTable extends React.Component {
             name="fulfillOrder"
             onClick={(e) => {
               e.preventDefault();
-              this.handleClick(order, orders);
+              this.handleClick(order, orders, index);
             }}
           >
             Fulfill Order

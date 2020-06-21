@@ -40,7 +40,6 @@ export class App extends React.Component {
   };
 
   addOrder = (newOrder) => {
-    let i = 0;
     const order = newOrder.reduce((acc, current) => {
       acc.price
         ? (acc.price += Number.parseInt(current.price * current.quantity))
@@ -61,7 +60,7 @@ export class App extends React.Component {
 
   //uses the orderID key to find and remove the fulfilled order within the state array
   updateOrders = (orderID, orders) => {
-    const updatedOrders = orders.filter((order) => order.orderID !== orderID);
+    const updatedOrders = orders.filter((order, index) => index !== orderID);
     this.setState({ orders: updatedOrders });
   };
 
