@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCollection } from "db";
+import { getCollection, addData } from "db";
 
 const router = Router();
 
@@ -8,9 +8,19 @@ router.get("/test", (_, res) => {
 });
 
 router.get("/products", async (_, res) => {
-  res.json(await getCollection("sample-products"));
+  try {
+    res.json(await getCollection("sample-products"));
+  } catch (e) {
+    throw Error(e);
+  }
 });
 
-router.post("/products", async (req, res) => {});
+router.post("/products", async (req, res) => {
+  try {
+    res.send(await addData(req.body, "sample-products"));
+  } catch (e) {
+    throw Error(e);
+  }
+});
 
 export default router;

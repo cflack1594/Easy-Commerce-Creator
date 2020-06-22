@@ -13,3 +13,19 @@ export const getCollection = async (collectionName) => {
     throw new Error(e);
   }
 };
+
+export const addData = async (data, collection) => {
+  try {
+    console.log(data);
+    await client.connect();
+
+    const { insertedId } = await client
+      .db("ecommerce-site-demo")
+      .collection(collection)
+      .insertOne(data);
+
+    console.log(`New Data at: ${insertedId}`);
+  } catch (e) {
+    throw new Error(e);
+  }
+};

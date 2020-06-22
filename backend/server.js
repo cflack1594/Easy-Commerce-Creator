@@ -5,6 +5,7 @@ import sales from "./routes/api/sales";
 import auth from "./routes/api/auth";
 
 const app = express();
+const bodyParser = require("body-parser");
 const PORT = 3001;
 
 app.get("/", (_, res) =>
@@ -16,6 +17,8 @@ app.use(
     origin: true,
   })
 );
+
+app.use(bodyParser.json());
 
 app.use("/api/products", products);
 app.use("/api/sales", sales);
