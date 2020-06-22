@@ -19,7 +19,7 @@ export class SalesTable extends React.Component {
         </thead>
         <tbody>
           <tr>
-            <td>{this.getMoney()}</td>
+            <td step=".01">{this.getMoney()}</td>
           </tr>
         </tbody>
       </table>

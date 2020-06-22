@@ -12,18 +12,22 @@ export class App extends React.Component {
     products: [],
     orders: [],
     sales: [],
-    loggedIn: false,
+    loggedIn: true,
     activePage: "Home",
   };
 
   async componentDidMount() {
-    this.setState({
-      products: await this.getData(
-        "http://localhost:3001/api/products/products"
-      ),
-      sales: await this.getData("http://localhost:3001/api/sales/sales"),
-      auth: await this.getData("http://localhost:3001/api/auth/auth"),
-    });
+    try {
+      this.setState({
+        products: await api.getData(
+          "http://localhost:3001/api/products/products"
+        ),
+        sales: await api.getData("http://localhost:3001/api/sales/sales"),
+        auth: await api.getData("http://localhost:3001/api/auth/auth"),
+      });
+    } catch (e) {
+      throw Error(e);
+    }
   }
 
   getData = async (url) => {
@@ -36,14 +40,15 @@ export class App extends React.Component {
   };
 
   addProduct = (newProduct) => {
+    api.postData(newProduct, "http://localhost:3001/api/products/products");
     this.setState({ products: [...this.state.products, newProduct] });
   };
 
   addOrder = (newOrder) => {
     const order = newOrder.reduce((acc, current) => {
       acc.price
-        ? (acc.price += Number.parseInt(current.price * current.quantity))
-        : (acc.price = Number.parseInt(current.price * current.quantity));
+        ? (acc.price += Number.parseFloat(current.price * current.quantity))
+        : (acc.price = Number.parseFloat(current.price * current.quantity));
       acc.value
         ? acc.value.push({ name: current.name, quantity: current.quantity })
         : (acc.value = [{ name: current.name, quantity: current.quantity }]);
@@ -51,11 +56,22 @@ export class App extends React.Component {
       return acc;
     }, {});
     this.setState({ orders: [...this.state.orders, order] });
+    this.updateSales(order);
     this.setState({ cart: [] });
   };
 
   addToCart = (order) => {
-    this.setState({ cart: [...this.state.cart, order] });
+    let updatedCart = [...this.state.cart];
+
+    let foundOrder = this.state.cart.findIndex(
+      (cartItem) => cartItem.name === order.name
+    );
+
+    if (this.state.cart[foundOrder])
+      updatedCart[foundOrder].quantity += order.quantity;
+    else updatedCart.push(order);
+
+    this.setState({ cart: updatedCart });
   };
 
   //uses the orderID key to find and remove the fulfilled order within the state array
@@ -66,6 +82,7 @@ export class App extends React.Component {
 
   updateSales = (order) => {
     this.setState({ sales: [...this.state.sales, order] });
+    api.postData(order, "http://localhost:3001/api/sales/sales");
   };
 
   login = (status) => {
@@ -82,7 +99,6 @@ export class App extends React.Component {
         addProduct={this.addProduct}
         addOrder={this.addOrder}
         updateOrders={this.updateOrders}
-        updateSales={this.updateSales}
         sales={this.state.sales}
         orders={this.state.orders}
       />
@@ -169,9 +185,9 @@ export class App extends React.Component {
 //         </li>
 //       </ul>
 //       <Switch>
-//         <Route path="/" component={this} />
-//         <Route path="/Login" component={components.Login} />
-//         <Route path="/Admin" component={components.AdminPage} />
+//         <Route exact path="/" component={this} />
+//         <Route exact path="/Login" component={components.Login} />
+//         <Route exact path="/Admin" component={components.AdminPage} />
 //       </Switch>
 //     </div>
 //   </Router>

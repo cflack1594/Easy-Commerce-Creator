@@ -1,0 +1,9 @@
+.table {
+  border: solid thin black;
+  max-width: 50px;
+}
+
+.table > ul {
+  display: flex;
+  flex-direction: column;
+}

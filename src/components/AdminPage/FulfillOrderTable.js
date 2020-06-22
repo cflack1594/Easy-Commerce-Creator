@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./FulfillTable.css";
+import styles from "./FulfillTable.module.css";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
     orders: PropTypes.array,
@@ -14,7 +14,7 @@ export class FulfillOrderTable extends React.Component {
 
   createOrderDisplayTable = (orders) => {
     return orders.length ? (
-      <table className={styles}>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Order ID</th>
@@ -39,7 +39,9 @@ export class FulfillOrderTable extends React.Component {
     return orders.map((order, index) => (
       <tr key={index}>
         <td name="orderID">{index}</td>
-        <td name="price">{order.price}</td>
+        <td name="price" step=".01">
+          {order.price}
+        </td>
         <td name="value">{this.showItems(order.value)}</td>
         <td>
           <button
@@ -60,7 +62,9 @@ export class FulfillOrderTable extends React.Component {
   showItems = (orderItems) => (
     <ul>
       {orderItems.map((item, index) => (
-        <li key={index}>{item.name}</li>
+        <li key={index}>
+          {item.quantity} x {item.name}
+        </li>
       ))}
     </ul>
   );

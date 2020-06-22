@@ -7,4 +7,16 @@ export const getData = async (url) => {
   }
 };
 
-export const postData = async () => {};
+export const postData = async (data, url) => {
+  try {
+    await window.fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
