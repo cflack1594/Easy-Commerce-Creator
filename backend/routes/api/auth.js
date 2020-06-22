@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCollection } from "db";
+import { getCollection, addData } from "db";
 
 const router = Router();
 
@@ -11,6 +11,12 @@ router.get("/auth", async (_, res) => {
   res.json(await getCollection("sample-auth"));
 });
 
-router.post("/auth", async (req, res) => {});
+router.post("/auth", async (req, res) => {
+  try {
+    res.send(await addData(req.body, "sample-auth"));
+  } catch (e) {
+    throw Error(e);
+  }
+});
 
 export default router;
