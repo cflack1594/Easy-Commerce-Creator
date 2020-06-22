@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FulfillOrderTable } from "./FulfillOrderTable";
 import { NewProductForm } from "./NewProductForm";
+import { SalesTable } from "./SalesTable";
 import styles from "./AdminPage.css";
 export class AdminPage extends React.Component {
   //Add product form
@@ -12,7 +13,6 @@ export class AdminPage extends React.Component {
     addProduct: PropTypes.func,
     addOrder: PropTypes.func,
     updateOrders: PropTypes.func,
-    updateSales: PropTypes.func,
     sales: PropTypes.array,
     orders: PropTypes.array,
   };
@@ -24,8 +24,8 @@ export class AdminPage extends React.Component {
         <FulfillOrderTable
           orders={this.props.orders}
           updateOrders={this.props.updateOrders}
-          updateSales={this.props.updateSales}
         />
+        <SalesTable sales={this.props.sales} />
       </div>
     );
   }

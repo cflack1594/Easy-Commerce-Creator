@@ -6,12 +6,10 @@ export class FulfillOrderTable extends React.Component {
     orders: PropTypes.array,
     addOrder: PropTypes.func,
     updateOrders: PropTypes.func,
-    updateSales: PropTypes.func,
   };
 
   handleClick = (order, orders, orderId) => {
     this.props.updateOrders(orderId, orders);
-    this.props.updateSales(order);
   };
 
   createOrderDisplayTable = (orders) => {
@@ -42,7 +40,7 @@ export class FulfillOrderTable extends React.Component {
       <tr key={index}>
         <td name="orderID">{index}</td>
         <td name="price">{order.price}</td>
-        <td name="value">stuff</td>
+        <td name="value">{this.showItems(order.value)}</td>
         <td>
           <button
             id="fulfillOrder"
@@ -59,8 +57,15 @@ export class FulfillOrderTable extends React.Component {
     ));
   };
 
+  showItems = (orderItems) => (
+    <ul>
+      {orderItems.map((item, index) => (
+        <li key={index}>{item.name}</li>
+      ))}
+    </ul>
+  );
+
   render() {
-    console.log(this.props.orders);
     return this.createOrderDisplayTable(this.props.orders);
   }
 }

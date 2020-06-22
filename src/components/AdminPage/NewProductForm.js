@@ -12,9 +12,11 @@ export class NewProductForm extends React.Component {
       document.getElementById("NewProductForm").querySelectorAll("input")
     );
   };
+
   createProduct = (inputs) => {
     const newProduct = Array.from(inputs).reduce(
-      (acc, input) => (acc = { ...acc, ...{ [input.name]: input.value } }),
+      (acc, input) =>
+        (acc = { ...acc, ...{ [input.name.toLowerCase()]: input.value } }),
       {}
     );
 
