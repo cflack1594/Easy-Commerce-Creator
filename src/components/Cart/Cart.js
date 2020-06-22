@@ -7,8 +7,6 @@ export class Cart extends React.Component {
     sales: PropTypes.array,
   };
 
-  orderID = this.props.sales.length;
-
   handleClick = () => {
     this.props.addOrder(this.props.cart);
   };

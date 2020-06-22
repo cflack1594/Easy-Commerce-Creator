@@ -10,9 +10,8 @@ export class App extends React.Component {
     auth: [],
     cart: [],
     products: [],
-    orders: [],
     sales: [],
-    loggedIn: true,
+    loggedIn: false,
     activePage: "Home",
   };
 
@@ -30,18 +29,23 @@ export class App extends React.Component {
     }
   }
 
-  getData = async (url) => {
-    try {
-      const resp = await api.getData(url);
-      return resp;
-    } catch (e) {
-      throw Error(e);
-    }
+  createProduct = async (newProduct) => {
+    await api.postData(
+      newProduct,
+      "http://localhost:3001/api/products/products"
+    );
+    this.setState({ products: [...this.state.products, newProduct] });
   };
 
-  addProduct = (newProduct) => {
-    api.postData(newProduct, "http://localhost:3001/api/products/products");
-    this.setState({ products: [...this.state.products, newProduct] });
+  createSale = async (order) => {
+    await api.postData(order, "http://localhost:3001/api/sales/sales");
+    this.setState({ sales: [...this.state.sales, order] });
+  };
+
+  updateSale = () => {};
+
+  createUser = (newUser) => {
+    api.postData(newUser, "http://localhost:3001/api/auth/auth");
   };
 
   addOrder = (newOrder) => {
@@ -55,8 +59,11 @@ export class App extends React.Component {
 
       return acc;
     }, {});
-    this.setState({ orders: [...this.state.orders, order] });
-    this.updateSales(order);
+
+    order.orderId = this.state.sales.length;
+    order.completed = false;
+
+    this.createSale(order);
     this.setState({ cart: [] });
   };
 
@@ -74,17 +81,6 @@ export class App extends React.Component {
     this.setState({ cart: updatedCart });
   };
 
-  //uses the orderID key to find and remove the fulfilled order within the state array
-  updateOrders = (orderID, orders) => {
-    const updatedOrders = orders.filter((order, index) => index !== orderID);
-    this.setState({ orders: updatedOrders });
-  };
-
-  updateSales = (order) => {
-    this.setState({ sales: [...this.state.sales, order] });
-    api.postData(order, "http://localhost:3001/api/sales/sales");
-  };
-
   login = (status) => {
     this.setState({ loggedIn: status });
   };
@@ -96,15 +92,14 @@ export class App extends React.Component {
   checkLoginStatus = () =>
     this.state.loggedIn ? (
       <AdminPage
-        addProduct={this.addProduct}
+        createProduct={this.createProduct}
         addOrder={this.addOrder}
         updateOrders={this.updateOrders}
         sales={this.state.sales}
-        orders={this.state.orders}
       />
     ) : null;
 
-  checkPage = (page) => {
+  getPage = (page) => {
     let ret;
 
     switch (page) {
@@ -133,6 +128,7 @@ export class App extends React.Component {
               auth={this.state.auth}
               login={this.login}
               loggedIn={this.state.loggedIn}
+              createUser={this.createUser}
             />
             {this.checkLoginStatus()}
           </div>
@@ -150,7 +146,7 @@ export class App extends React.Component {
     return (
       <div className="App">
         <Nav goToPage={this.goToPage} />
-        {this.checkPage(this.state.activePage)}
+        {this.getPage(this.state.activePage)}
         <Nav goToPage={this.goToPage} />
       </div>
     );

@@ -4,23 +4,21 @@ import { FormInput } from "./FormInput";
 import styles from "./Form.css";
 export class NewProductForm extends React.Component {
   static propTypes = {
-    addProduct: PropTypes.func,
+    createProduct: PropTypes.func,
   };
 
   handleClick = (target) => {
-    this.createProduct(
-      document.getElementById("NewProductForm").querySelectorAll("input")
-    );
-  };
+    const inputs = document
+      .getElementById("NewProductForm")
+      .querySelectorAll("input");
 
-  createProduct = (inputs) => {
     const newProduct = Array.from(inputs).reduce(
       (acc, input) =>
         (acc = { ...acc, ...{ [input.name.toLowerCase()]: input.value } }),
       {}
     );
 
-    this.props.addProduct(newProduct);
+    this.props.createProduct(newProduct);
   };
 
   inputKeys = [

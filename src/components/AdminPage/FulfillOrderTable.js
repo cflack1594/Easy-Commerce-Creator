@@ -3,14 +3,11 @@ import PropTypes from "prop-types";
 import styles from "./FulfillTable.module.css";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
-    orders: PropTypes.array,
+    sales: PropTypes.array,
     addOrder: PropTypes.func,
-    updateOrders: PropTypes.func,
   };
 
-  handleClick = (order, orders, orderId) => {
-    this.props.updateOrders(orderId, orders);
-  };
+  handleClick = () => {};
 
   createOrderDisplayTable = (orders) => {
     return orders.length ? (
@@ -36,20 +33,18 @@ export class FulfillOrderTable extends React.Component {
   };
 
   makeOrderMarkup = (orders) => {
-    return orders.map((order, index) => (
-      <tr key={index}>
-        <td name="orderID">{index}</td>
-        <td name="price" step=".01">
-          {order.price}
-        </td>
-        <td name="value">{this.showItems(order.value)}</td>
+    return orders.map((order) => (
+      <tr key={order.orderId}>
+        <td name="orderID">{order.orderId}</td>
+        <td name="price">{order.price.toFixed(2)}</td>
+        <td name="value">{this.createItemList(order.value)}</td>
         <td>
           <button
             id="fulfillOrder"
             name="fulfillOrder"
             onClick={(e) => {
               e.preventDefault();
-              this.handleClick(order, orders, index);
+              this.handleClick();
             }}
           >
             Fulfill Order
@@ -59,7 +54,7 @@ export class FulfillOrderTable extends React.Component {
     ));
   };
 
-  showItems = (orderItems) => (
+  createItemList = (orderItems) => (
     <ul>
       {orderItems.map((item, index) => (
         <li key={index}>
@@ -70,6 +65,8 @@ export class FulfillOrderTable extends React.Component {
   );
 
   render() {
-    return this.createOrderDisplayTable(this.props.orders);
+    return this.createOrderDisplayTable(
+      this.props.sales.filter(({ completed }) => !completed)
+    );
   }
 }

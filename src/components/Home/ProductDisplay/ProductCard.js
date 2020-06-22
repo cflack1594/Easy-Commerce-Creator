@@ -23,7 +23,10 @@ export class ProductCard extends React.Component {
       quantity: this.state.quantity,
     };
 
-    if (this.state.quantity) this.props.addToCart(order);
+    if (this.state.quantity) {
+      this.props.addToCart(order);
+      this.setState({ quantity: 0 });
+    }
   };
 
   quantityChanger = (newVal) => {
