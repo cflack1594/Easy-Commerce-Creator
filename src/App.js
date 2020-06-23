@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { Home, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
@@ -11,6 +10,7 @@ export class App extends React.Component {
     cart: [],
     products: [],
     sales: [],
+    orders: [],
     loggedIn: false,
     activePage: "Home",
   };
@@ -37,15 +37,28 @@ export class App extends React.Component {
     this.setState({ products: [...this.state.products, newProduct] });
   };
 
-  createSale = async (order) => {
-    await api.postData(order, "http://localhost:3001/api/sales/sales");
-    this.setState({ sales: [...this.state.sales, order] });
+  deleteProduct = async (product) => {
+    await api.deleteData(
+      product,
+      "http://localhost:3001/api/products/products"
+    );
+    this.setState({
+      products: this.state.products.filter((item) => item._id !== product._id),
+    });
   };
 
-  updateSale = () => {};
+  createSale = async (order) => {
+    await api.postData(order, "http://localhost:3001/api/sales/sales");
+    //this.setState({ sales: [...this.state.sales, order] });
+  };
 
-  createUser = (newUser) => {
-    api.postData(newUser, "http://localhost:3001/api/auth/auth");
+  updateSale = async (order) => {
+    order.completed = true;
+    await api.updateData(order, "http://localhost:3001/api/sales/sales");
+  };
+
+  createUser = async (newUser) => {
+    await api.postData(newUser, "http://localhost:3001/api/auth/auth");
   };
 
   addOrder = (newOrder) => {
@@ -94,7 +107,7 @@ export class App extends React.Component {
       <AdminPage
         createProduct={this.createProduct}
         addOrder={this.addOrder}
-        updateOrders={this.updateOrders}
+        updateSale={this.updateSale}
         sales={this.state.sales}
       />
     ) : null;
@@ -116,8 +129,9 @@ export class App extends React.Component {
         ret = (
           <Home
             products={this.state.products}
-            addOrder={this.addOrder}
             addToCart={this.addToCart}
+            deleteProduct={this.deleteProduct}
+            loggedIn={this.state.loggedIn}
           />
         );
         break;

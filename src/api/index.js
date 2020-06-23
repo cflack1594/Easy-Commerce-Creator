@@ -20,3 +20,31 @@ export const postData = async (data, url) => {
     throw new Error(error);
   }
 };
+
+export const deleteData = async (data, url) => {
+  try {
+    await window.fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    throw Error(e);
+  }
+};
+
+export const updateData = async (data, url) => {
+  try {
+    await window.fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    throw Error(e);
+  }
+};
