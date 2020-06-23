@@ -36,7 +36,7 @@ export class NewProductForm extends React.Component {
   render() {
     return (
       <form id="NewProductForm" className={styles}>
-        <p>Creat New Product</p>
+        <p>Create New Product</p>
         {this.formInputs}
         <button
           type="submit"
@@ -46,7 +46,7 @@ export class NewProductForm extends React.Component {
             this.handleClick();
           }}
         >
-          Submit
+          Submit Product
         </button>
       </form>
     );
