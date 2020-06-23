@@ -10,7 +10,6 @@ export class App extends React.Component {
     cart: [],
     products: [],
     sales: [],
-    orders: [],
     loggedIn: false,
     activePage: "Home",
   };
@@ -48,8 +47,9 @@ export class App extends React.Component {
   };
 
   createSale = async (order) => {
-    await api.postData(order, "http://localhost:3001/api/sales/sales");
-    //this.setState({ sales: [...this.state.sales, order] });
+    await api
+      .postData(order, "http://localhost:3001/api/sales/sales")
+      .then(window.location.reload(false));
   };
 
   updateSale = async (order) => {
@@ -196,7 +196,7 @@ export class App extends React.Component {
 //       </ul>
 //       <Switch>
 //         <Route exact path="/" component={this} />
-//         <Route exact path="/Login" component={components.Login} />
+//         <Route exact path="/Login" component={components.Login loggedIn={this.state.login}} />
 //         <Route exact path="/Admin" component={components.AdminPage} />
 //       </Switch>
 //     </div>
