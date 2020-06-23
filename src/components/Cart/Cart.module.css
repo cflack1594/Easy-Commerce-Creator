@@ -1,0 +1,44 @@
+.cart > table {
+  flex-wrap: wrap;
+  border-collapse: separate;
+  border: solid thin #333;
+  border-spacing: 10px;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.cart > th,
+td {
+  padding: 5px;
+  width: 25%;
+  border: solid thin #333;
+}
+
+.cart > th {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.cart > th:last-child {
+  text-align: right;
+}
+
+.cart > tr {
+  border-bottom: solid thin black;
+  padding: 5px;
+}
+
+.cart > td:last-child {
+  justify-content: flex-end;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 500px;
+  max-width: 100vw;
+}

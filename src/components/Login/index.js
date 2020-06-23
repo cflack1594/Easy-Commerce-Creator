@@ -13,12 +13,12 @@ export class Login extends React.Component {
     loggedIn: PropTypes.bool,
   };
 
-  checkLogin = () =>
-    this.props.loggedIn ? (
+  checkLogin = () => {
+    return this.props.loggedIn ? (
       <Logout login={this.props.login} loggedIn={this.props.loggedIn} />
     ) : (
       <div id="login">
-        <SignUp createUser={this.props.createUser} />
+        {/* <SignUp createUser={this.props.createUser} /> */}
         <SignIn
           auth={this.props.auth}
           login={this.props.login}
@@ -26,6 +26,7 @@ export class Login extends React.Component {
         />
       </div>
     );
+  };
 
   render() {
     return this.checkLogin();

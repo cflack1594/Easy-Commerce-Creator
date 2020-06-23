@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Nav.css";
+import styles from "./Nav.module.css";
 import PropTypes from "prop-types";
 
 export class Nav extends React.Component {
@@ -25,7 +25,7 @@ export class Nav extends React.Component {
 
   render() {
     return (
-      <ul id="nav" className={styles}>
+      <ul id="nav" className={styles.nav}>
         {this.createNavBar()}
       </ul>
     );

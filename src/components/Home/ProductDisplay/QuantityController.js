@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 export class QuantityController extends React.Component {
   static propTypes = {
-    quantChange: PropTypes.func,
+    quantityChange: PropTypes.func,
     quantity: PropTypes.number,
   };
 
   handleChange = (value) => {
-    this.props.quantChange(Number.parseInt(value));
+    this.props.quantityChange(Number.parseInt(value));
   };
 
   render() {

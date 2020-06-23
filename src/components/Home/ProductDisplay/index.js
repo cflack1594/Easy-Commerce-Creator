@@ -6,7 +6,9 @@ import styles from "./ProductList.css";
 export class ProductDisplay extends React.Component {
   static propTypes = {
     addToCart: PropTypes.func,
+    deleteProduct: PropTypes.func,
     products: PropTypes.array,
+    loggedIn: PropTypes.bool,
   };
 
   createProductCards = (products) =>
@@ -16,6 +18,8 @@ export class ProductDisplay extends React.Component {
         index={index}
         product={product}
         addToCart={this.props.addToCart}
+        loggedIn={this.props.loggedIn}
+        deleteProduct={this.props.deleteProduct}
       />
     ));
 

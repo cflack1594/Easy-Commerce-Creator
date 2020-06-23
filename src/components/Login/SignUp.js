@@ -6,6 +6,11 @@ export class SignUp extends React.Component {
     createUser: PropTypes.func,
   };
 
+  handleClick = () => {
+    document.getElementById("#signUp").querySelectorAll("input").reduce();
+    this.props.createUser();
+  };
+
   render() {
     return (
       <Fragment>
