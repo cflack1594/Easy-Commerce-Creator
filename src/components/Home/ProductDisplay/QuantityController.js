@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-
+import "bulma/css/bulma.css";
 export class QuantityController extends React.Component {
   static propTypes = {
     quantityChange: PropTypes.func,
@@ -16,6 +16,7 @@ export class QuantityController extends React.Component {
       <Fragment>
         <label htmlFor="quantity">Quantity</label>
         <input
+          className="input is-primary"
           type="number"
           name="quantity"
           value={this.props.quantity}

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
-import styles from "./ProductCard.module.css";
 import { processFormData } from "utils";
+import "bulma/css/bulma.css";
 export class ProductCard extends React.Component {
   static propTypes = {
     addToCart: PropTypes.func,
@@ -57,7 +57,7 @@ export class ProductCard extends React.Component {
   };
   createProductCard = (product) => {
     return (
-      <div id="ProductCard" className={styles.ProductCard}>
+      <div id="ProductCard" className="tile">
         {/* {ProductImage(product.image)} */}
         {ProductInfo(product)}
         <QuantityController

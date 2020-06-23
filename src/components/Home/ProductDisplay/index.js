@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { ProductCard } from "./ProductCard";
-import styles from "./ProductList.css";
-import { container } from "bulma";
+import "bulma/css/bulma.css";
 
 export class ProductDisplay extends React.Component {
   static propTypes = {
@@ -26,7 +25,7 @@ export class ProductDisplay extends React.Component {
 
   render() {
     return (
-      <div id="ProductList" className={container}>
+      <div id="ProductList" className="section">
         {this.createProductCards(this.props.products)}
       </div>
     );

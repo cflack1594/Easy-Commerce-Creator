@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import styles from "./Cart.module.css";
 export class Cart extends React.Component {
   static propTypes = {
     addOrder: PropTypes.func,
@@ -32,7 +31,7 @@ export class Cart extends React.Component {
 
   render() {
     return this.props.cart.length ? (
-      <table id="cart" className={styles.cart}>
+      <table id="cart" className="">
         <thead>
           <tr>
             {this.headers.map((header, index) => (
@@ -61,7 +60,7 @@ export class Cart extends React.Component {
         </tbody>
       </table>
     ) : (
-      <div className={styles.cart}>
+      <div className="">
         <p>Nothing In Cart</p>
       </div>
     );
