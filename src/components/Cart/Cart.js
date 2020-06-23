@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import "bulma/css/bulma.css";
 export class Cart extends React.Component {
   static propTypes = {
     addOrder: PropTypes.func,
@@ -31,7 +32,7 @@ export class Cart extends React.Component {
 
   render() {
     return this.props.cart.length ? (
-      <table id="cart" className="">
+      <table id="cart" className="box table is-striped is-bordered">
         <thead>
           <tr>
             {this.headers.map((header, index) => (
@@ -60,9 +61,13 @@ export class Cart extends React.Component {
         </tbody>
       </table>
     ) : (
-      <div className="">
-        <p>Nothing In Cart</p>
-      </div>
+      <table className="box table">
+        <tbody>
+          <tr>
+            <td>Nothing in Cart</td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 }

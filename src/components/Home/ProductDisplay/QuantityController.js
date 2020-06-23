@@ -13,10 +13,12 @@ export class QuantityController extends React.Component {
 
   render() {
     return (
-      <Fragment>
-        <label htmlFor="quantity">Quantity</label>
+      <div className="section">
+        <label htmlFor="quantity" className="label">
+          Quantity:
+        </label>
         <input
-          className="input is-primary"
+          className="input field is-primary is-small is-rounded"
           type="number"
           name="quantity"
           value={this.props.quantity}
@@ -25,7 +27,7 @@ export class QuantityController extends React.Component {
           id="quantity"
           onChange={(e) => this.handleChange(e.target.value)}
         ></input>
-      </Fragment>
+      </div>
     );
   }
 }

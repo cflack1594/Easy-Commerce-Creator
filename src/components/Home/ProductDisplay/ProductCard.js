@@ -47,6 +47,7 @@ export class ProductCard extends React.Component {
     if (this.props.loggedIn)
       return (
         <button
+          className="button is-rounded is-danger"
           name="deleteItem"
           id="deleteItem"
           onClick={(e) => this.handleClick(e.target)}
@@ -57,14 +58,15 @@ export class ProductCard extends React.Component {
   };
   createProductCard = (product) => {
     return (
-      <div id="ProductCard" className="tile">
+      <div id="ProductCard" className="column is-one-quarter box">
         {/* {ProductImage(product.image)} */}
-        {ProductInfo(product)}
+        <div className="section">{ProductInfo(product)}</div>
         <QuantityController
           quantity={this.state.quantity}
           quantityChange={this.quantityChanger}
         />
         <button
+          className="button is-rounded is-success is-active"
           name="addItem"
           id="addItem"
           onClick={(e) => this.handleClick(e.target)}

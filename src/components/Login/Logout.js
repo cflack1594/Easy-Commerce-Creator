@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import "bulma/css/bulma.css";
 export class Logout extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -13,7 +13,12 @@ export class Logout extends React.Component {
 
   render() {
     return (
-      <button type="button" name="logout" onClick={this.handleClick}>
+      <button
+        className="button is-rounded is-active"
+        type="button"
+        name="logout"
+        onClick={this.handleClick}
+      >
         Logout
       </button>
     );

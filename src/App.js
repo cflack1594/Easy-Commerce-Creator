@@ -2,7 +2,7 @@ import React from "react";
 import { Home, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
-//add state proxy for components to work with
+import "bulma/css/bulma.css";
 
 export class App extends React.Component {
   state = {
@@ -137,7 +137,7 @@ export class App extends React.Component {
         break;
       case "Login":
         ret = (
-          <div>
+          <div className="box">
             <Login
               auth={this.state.auth}
               login={this.login}
@@ -158,7 +158,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="">
         <Nav goToPage={this.goToPage} />
         {this.getPage(this.state.activePage)}
         <Nav goToPage={this.goToPage} />

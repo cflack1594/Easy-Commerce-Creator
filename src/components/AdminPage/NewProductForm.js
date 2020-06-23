@@ -34,10 +34,11 @@ export class NewProductForm extends React.Component {
 
   render() {
     return (
-      <form id="NewProductForm" className="">
-        <p>Create New Product</p>
+      <form id="NewProductForm" className="box">
+        <label className="label">Create New Product</label>
         {this.formInputs}
         <button
+          className="button is-rounded"
           type="submit"
           name="submit"
           onClick={(e) => {

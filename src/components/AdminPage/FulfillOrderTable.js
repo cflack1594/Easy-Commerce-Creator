@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "bulma/css/bulma.css";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
     updateSale: PropTypes.func,
@@ -20,7 +21,7 @@ export class FulfillOrderTable extends React.Component {
 
   createOrderDisplayTable = (orders) => {
     return orders.length ? (
-      <table className="">
+      <table className="table is-striped is-bordered">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -31,7 +32,7 @@ export class FulfillOrderTable extends React.Component {
         <tbody>{this.makeOrderMarkup(orders)}</tbody>
       </table>
     ) : (
-      <table className="">
+      <table className="table is-bordered">
         <thead>
           <tr>
             <th>No Orders to complete</th>
