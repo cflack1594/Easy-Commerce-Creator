@@ -11,6 +11,7 @@ export class AdminPage extends React.Component {
   //sales tracking
   static propTypes = {
     createProduct: PropTypes.func,
+    updateSale: PropTypes.func,
     addOrder: PropTypes.func,
     sales: PropTypes.array,
   };
@@ -19,7 +20,10 @@ export class AdminPage extends React.Component {
     return (
       <div id="AdminPage" className={styles}>
         <NewProductForm createProduct={this.props.createProduct} />
-        <FulfillOrderTable sales={this.props.sales} />
+        <FulfillOrderTable
+          sales={this.props.sales}
+          updateSale={this.props.updateSale}
+        />
         <SalesTable sales={this.props.sales} />
       </div>
     );

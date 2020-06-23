@@ -3,11 +3,21 @@ import PropTypes from "prop-types";
 import styles from "./FulfillTable.module.css";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
+    updateSale: PropTypes.func,
     sales: PropTypes.array,
     addOrder: PropTypes.func,
   };
 
-  handleClick = () => {};
+  state = {
+    orders: this.props.sales.filter((sale) => !sale.completed),
+  };
+
+  handleClick = (order) => {
+    this.props.updateSale(order);
+    this.setState({
+      orders: this.state.orders.filter((item) => item._id !== order._id),
+    });
+  };
 
   createOrderDisplayTable = (orders) => {
     return orders.length ? (
@@ -22,7 +32,7 @@ export class FulfillOrderTable extends React.Component {
         <tbody>{this.makeOrderMarkup(orders)}</tbody>
       </table>
     ) : (
-      <table>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>No Orders to complete</th>
@@ -44,7 +54,7 @@ export class FulfillOrderTable extends React.Component {
             name="fulfillOrder"
             onClick={(e) => {
               e.preventDefault();
-              this.handleClick();
+              this.handleClick(order);
             }}
           >
             Fulfill Order
@@ -65,8 +75,6 @@ export class FulfillOrderTable extends React.Component {
   );
 
   render() {
-    return this.createOrderDisplayTable(
-      this.props.sales.filter(({ completed }) => !completed)
-    );
+    return this.createOrderDisplayTable(this.state.orders);
   }
 }
