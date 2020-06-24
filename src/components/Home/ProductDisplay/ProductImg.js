@@ -5,9 +5,6 @@ import React from "react";
 
 export const ProductImage = (image, name) => (
   <figure>
-    <img
-      src={`https://source.unsplash.com/250x250/?${name},${name}`}
-      alt=""
-    ></img>
+    <img src={`https://source.unsplash.com/250x250/?${name}`} alt=""></img>
   </figure>
 );

@@ -28,6 +28,10 @@ h1 {
   text-align: center;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .box:last-child { margin-bottom: 1.5rem; }
 
 #addItem {

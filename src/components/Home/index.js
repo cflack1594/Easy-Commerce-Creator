@@ -13,7 +13,7 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <div className="container box  has-background-dark">
+      <div className="container box has-background-dark">
         <div id="header" className="section">
           {Header()}
         </div>
