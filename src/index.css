@@ -39,9 +39,24 @@ h1 {
   max-width: 30rem;
 }
 
+#productForm {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  max-width: 20rem;
+}
+
 #ProductCard {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+#productInfo {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#quantity {
+  padding: 1rem;
 }
 
 #nav {

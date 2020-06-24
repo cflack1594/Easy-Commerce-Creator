@@ -11,6 +11,7 @@ export class FormInput extends React.Component {
     return (
       <div>
         <input
+          id="productForm"
           className="input field is-primary is-small is-rounded"
           type={this.props.type}
           name={this.props.name}

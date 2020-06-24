@@ -13,7 +13,7 @@ export class QuantityController extends React.Component {
 
   render() {
     return (
-      <div className="section">
+      <div id="quantity" className="section">
         <label htmlFor="quantity" className="label">
           Quantity:
         </label>

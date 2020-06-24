@@ -16,23 +16,23 @@ export class Nav extends React.Component {
 
   createNavBar = () =>
     this.links.map((link, index) => (
-      <p key={index}>
+      <li key={index}>
         <a
-          className="link is-info has-text-white"
+          className="link is-info has-text-link-light"
           href="/{link}"
           id={link}
           onClick={(e) => this.handleClick(e)}
         >
           {link}
         </a>
-      </p>
+      </li>
     ));
 
   render() {
     return (
       <section className="section">
         <div className="container level">
-          <nav id="nav" className="level-item">
+          <nav id="nav" className="level-item tabs">
             {this.createNavBar()}
           </nav>
         </div>

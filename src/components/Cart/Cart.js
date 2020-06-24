@@ -46,14 +46,23 @@ export class Cart extends React.Component {
           ))}
           <tr>
             <td>
-              {" "}
-              Grand Total: $
-              {this.props.cart
-                .reduce((acc, item) => (acc += item.price * item.quantity), 0)
-                .toFixed(2)}
+              <strong>Grand Total:</strong>
             </td>
             <td>
-              <button type="button" name="checkout" onClick={this.handleClick}>
+              <strong>
+                $
+                {this.props.cart
+                  .reduce((acc, item) => (acc += item.price * item.quantity), 0)
+                  .toFixed(2)}
+              </strong>
+            </td>
+            <td>
+              <button
+                className="button is-rounded is-small has-background-primary-light has-text-black-bis"
+                type="button"
+                name="checkout"
+                onClick={this.handleClick}
+              >
                 Checkout
               </button>
             </td>
@@ -64,7 +73,9 @@ export class Cart extends React.Component {
       <table className="column box table has-background-info-light is-one-quarter">
         <tbody>
           <tr>
-            <td>Nothing in Cart</td>
+            <td>
+              <strong>Nothing in Cart</strong>
+            </td>
           </tr>
         </tbody>
       </table>

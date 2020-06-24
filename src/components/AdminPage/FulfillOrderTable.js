@@ -48,6 +48,7 @@ export class FulfillOrderTable extends React.Component {
         <td name="value">{this.createItemList(order.value)}</td>
         <td>
           <button
+            className="button is-rounded is-small has-background-primary-light has-text-black-bis"
             id="fulfillOrder"
             name="fulfillOrder"
             onClick={(e) => {
@@ -75,6 +76,7 @@ export class FulfillOrderTable extends React.Component {
   render() {
     return (
       <table className="table box is-striped is-bordered">
+        <label className="label title is-5">Incoming Orders</label>
         {this.createOrderDisplayTable(this.state.orders)}
       </table>
     );

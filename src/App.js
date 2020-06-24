@@ -140,7 +140,7 @@ export class App extends React.Component {
       case "Login":
         ret = (
           <div className="section columns is-centered is-vcentered">
-            <div>
+            <div className=" box has-background-dark">
               <Login
                 auth={this.state.auth}
                 login={this.login}

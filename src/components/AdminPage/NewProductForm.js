@@ -25,7 +25,7 @@ export class NewProductForm extends React.Component {
     { name: "Price", type: "number" },
     { name: "Stock", type: "number" },
     { name: "Description", type: "string" },
-    { name: "Image", type: "file" },
+    // { name: "Image", type: "file" },
   ];
 
   formInputs = this.inputKeys.map((input, index) => (
@@ -35,7 +35,7 @@ export class NewProductForm extends React.Component {
   render() {
     return (
       <form id="NewProductForm" className="box">
-        <label className="label">Create New Product</label>
+        <label className="label title is-5">Create New Product</label>
         {this.formInputs}
         <button
           className="button is-rounded"
