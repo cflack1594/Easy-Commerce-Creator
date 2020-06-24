@@ -25,7 +25,10 @@ export class ProductDisplay extends React.Component {
 
   render() {
     return (
-      <div id="ProductList" className="columns is-multiline is-4">
+      <div
+        id="ProductList"
+        className="container columns is-multiline is-centered is-4"
+      >
         {this.createProductCards(this.props.products)}
       </div>
     );

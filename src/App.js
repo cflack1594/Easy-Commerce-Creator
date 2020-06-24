@@ -118,11 +118,13 @@ export class App extends React.Component {
     switch (page) {
       case "Cart":
         ret = (
-          <Cart
-            addOrder={this.addOrder}
-            cart={this.state.cart}
-            sales={this.state.sales}
-          />
+          <div id="cart" className="section columns is-centered is-vcentered">
+            <Cart
+              addOrder={this.addOrder}
+              cart={this.state.cart}
+              sales={this.state.sales}
+            />
+          </div>
         );
         break;
       case "Home":
@@ -137,14 +139,16 @@ export class App extends React.Component {
         break;
       case "Login":
         ret = (
-          <div className="box">
-            <Login
-              auth={this.state.auth}
-              login={this.login}
-              loggedIn={this.state.loggedIn}
-              createUser={this.createUser}
-            />
-            {this.checkLoginStatus()}
+          <div className="section columns is-centered is-vcentered">
+            <div>
+              <Login
+                auth={this.state.auth}
+                login={this.login}
+                loggedIn={this.state.loggedIn}
+                createUser={this.createUser}
+              />
+              {this.checkLoginStatus()}
+            </div>
           </div>
         );
         break;
@@ -158,7 +162,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="">
+      <div className="has-background-grey-dark">
         <Nav goToPage={this.goToPage} />
         {this.getPage(this.state.activePage)}
         <Nav goToPage={this.goToPage} />

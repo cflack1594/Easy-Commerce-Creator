@@ -13,7 +13,7 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <div className="">
+      <div className="container box  has-background-dark">
         {Header()}
         <ProductDisplay
           products={this.props.products}

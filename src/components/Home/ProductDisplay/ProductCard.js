@@ -58,7 +58,7 @@ export class ProductCard extends React.Component {
   };
   createProductCard = (product) => {
     return (
-      <div id="ProductCard" className="column is-one-quarter box">
+      <div id="ProductCard" className="column is-one-fifth box">
         {/* {ProductImage(product.image)} */}
         <div className="section">{ProductInfo(product)}</div>
         <QuantityController
