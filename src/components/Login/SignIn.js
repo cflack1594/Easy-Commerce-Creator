@@ -55,6 +55,10 @@ export class SignIn extends React.Component {
   };
 
   render() {
-    return <form id="login">{this.createLogin()}</form>;
+    return (
+      <form className="container has-background-info-light">
+        {this.createLogin()}
+      </form>
+    );
   }
 }
