@@ -30,6 +30,20 @@ h1 {
 
 .box:last-child { margin-bottom: 1.5rem; }
 
+#addItem {
+  max-width: 7rem;
+  margin-bottom: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+#deleteItem {
+  max-width: 7rem;
+}
+
+#header {
+  padding-top: 38px;
+}
+
 #sales table {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -53,6 +67,7 @@ h1 {
 #productInfo {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 #quantity {
@@ -63,4 +78,8 @@ h1 {
   font-size: 1.5rem;
   justify-content: space-evenly;
   text-decoration: underline;
+}
+
+#navSection {
+  padding-bottom: 0;
 }

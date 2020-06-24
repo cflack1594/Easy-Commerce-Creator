@@ -14,7 +14,9 @@ export class Home extends React.Component {
   render() {
     return (
       <div className="container box  has-background-dark">
-        {Header()}
+        <div id="header" className="section">
+          {Header()}
+        </div>
         <ProductDisplay
           products={this.props.products}
           deleteProduct={this.props.deleteProduct}

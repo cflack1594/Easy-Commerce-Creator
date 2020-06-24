@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "bulma/css/bulma.css";
-import "index.css";
+import logo from "images/easyCommerceLogo.png";
 export class Nav extends React.Component {
   static propTypes = {
     goToPage: PropTypes.func,
@@ -30,9 +30,10 @@ export class Nav extends React.Component {
 
   render() {
     return (
-      <section className="section">
+      <section id="navSection" className="section">
         <div className="container level">
-          <nav id="nav" className="level-item tabs">
+          <img src={logo} alt="logo"></img>
+          <nav id="nav" className="level-item">
             {this.createNavBar()}
           </nav>
         </div>
