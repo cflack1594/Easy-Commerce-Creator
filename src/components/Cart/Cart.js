@@ -32,7 +32,7 @@ export class Cart extends React.Component {
 
   render() {
     return this.props.cart.length ? (
-      <table id="cart" className="box table is-striped is-bordered">
+      <table className="column box table is-striped is-bordered has-background-info-light is-one-quarter">
         <thead>
           <tr>
             {this.headers.map((header, index) => (
@@ -61,7 +61,7 @@ export class Cart extends React.Component {
         </tbody>
       </table>
     ) : (
-      <table className="box table">
+      <table className="column box table has-background-info-light is-one-quarter">
         <tbody>
           <tr>
             <td>Nothing in Cart</td>
