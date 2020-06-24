@@ -17,13 +17,15 @@ export class AdminPage extends React.Component {
 
   render() {
     return (
-      <div id="AdminPage" className="">
+      <div id="AdminPage" className="section">
         <NewProductForm createProduct={this.props.createProduct} />
-        <FulfillOrderTable
-          sales={this.props.sales}
-          updateSale={this.props.updateSale}
-        />
-        <SalesTable sales={this.props.sales} />
+        <div id="sales" className="columns">
+          <FulfillOrderTable
+            sales={this.props.sales}
+            updateSale={this.props.updateSale}
+          />
+          <SalesTable sales={this.props.sales} />
+        </div>
       </div>
     );
   }
