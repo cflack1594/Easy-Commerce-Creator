@@ -1,7 +1,13 @@
-body {
-  margin: 0;
+:root {
+  --primary-color: blue;
+
   max-width: 100vw;
   max-height: 100vw;
+}
+
+body {
+  font-size: 2rem;
+  margin: 0;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -16,4 +22,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  text-align: center;
+}
+
+.box:last-child { margin-bottom: 1.5rem; }
+
+#sales table {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+#login {
+  max-width: 30rem;
+}
+
+#ProductCard {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+#nav {
+  font-size: 1.5rem;
+  justify-content: space-evenly;
+  text-decoration: underline;
 }
