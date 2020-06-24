@@ -40,6 +40,27 @@ input[type=number] {
   margin-right: 0.25rem;
 }
 
+#cart {
+  font-size: 1.2rem;
+  max-width: 1000px;
+}
+
+#cart td {
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: 1.3rem;
+  width: 250px;
+  text-align: start;
+}
+
+#cartProductName {
+  text-align: center;
+}
+
+#checkout {
+  height: 5rem;
+}
+
 #deleteItem {
   max-width: 7rem;
 }

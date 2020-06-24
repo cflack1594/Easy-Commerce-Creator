@@ -1,13 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "bulma/css/bulma.css";
+import { formatter } from "utils";
 export class SalesTable extends React.Component {
   static propTypes = {
     sales: PropTypes.array,
   };
 
   getMoney = () =>
-    this.props.sales.reduce((acc, order) => (acc += order.price), 0);
+    formatter.format(
+      this.props.sales.reduce((acc, order) => (acc += order.price), 0)
+    );
 
   render() {
     return (
@@ -19,7 +22,7 @@ export class SalesTable extends React.Component {
         </thead>
         <tbody>
           <tr>
-            <td>${this.getMoney().toFixed(2)}</td>
+            <td>{this.getMoney()}</td>
           </tr>
         </tbody>
       </table>

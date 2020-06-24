@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import "bulma/css/bulma.css";
+import { formatter } from "utils";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
     updateSale: PropTypes.func,
@@ -44,7 +45,7 @@ export class FulfillOrderTable extends React.Component {
     return orders.map((order) => (
       <tr key={order.orderId}>
         <td name="orderID">{order.orderId}</td>
-        <td name="price">{order.price.toFixed(2)}</td>
+        <td name="price">{formatter.format(order.price)}</td>
         <td name="value">{this.createItemList(order.value)}</td>
         <td>
           <button

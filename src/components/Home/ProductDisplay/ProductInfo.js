@@ -1,5 +1,6 @@
 import React from "react";
 import "bulma/css/bulma.css";
+import { formatter } from "utils";
 
 export const ProductInfo = (product) => {
   const validKeys = ["name", "price"];
@@ -14,7 +15,7 @@ export const ProductInfo = (product) => {
             key={index}
             id={dataKey}
           >
-            ${Number.parseFloat(product[dataKey]).toFixed(2)}
+            {formatter.format(product[dataKey])}
           </p>
         );
       return (

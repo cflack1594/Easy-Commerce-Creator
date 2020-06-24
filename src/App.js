@@ -118,12 +118,14 @@ export class App extends React.Component {
     switch (page) {
       case "Cart":
         ret = (
-          <div id="cart" className="section columns is-centered is-vcentered">
-            <Cart
-              addOrder={this.addOrder}
-              cart={this.state.cart}
-              sales={this.state.sales}
-            />
+          <div className=" columns is-centered is-vcentered">
+            <div id="cart" className="column section">
+              <Cart
+                addOrder={this.addOrder}
+                cart={this.state.cart}
+                sales={this.state.sales}
+              />
+            </div>
           </div>
         );
         break;
@@ -140,7 +142,7 @@ export class App extends React.Component {
       case "Login":
         ret = (
           <div className="section columns is-centered is-vcentered">
-            <div className=" box has-background-dark">
+            <div className="box has-background-dark">
               <Login
                 auth={this.state.auth}
                 login={this.login}
