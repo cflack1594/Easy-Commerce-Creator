@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Nav.module.css";
 import PropTypes from "prop-types";
-
+import "bulma/css/bulma.css";
+import "index.css";
 export class Nav extends React.Component {
   static propTypes = {
     goToPage: PropTypes.func,
@@ -16,18 +16,27 @@ export class Nav extends React.Component {
 
   createNavBar = () =>
     this.links.map((link, index) => (
-      <li key={index}>
-        <a href="/{link}" id={link} onClick={(e) => this.handleClick(e)}>
+      <p key={index}>
+        <a
+          className="link is-info has-text-white"
+          href="/{link}"
+          id={link}
+          onClick={(e) => this.handleClick(e)}
+        >
           {link}
         </a>
-      </li>
+      </p>
     ));
 
   render() {
     return (
-      <ul id="nav" className={styles.nav}>
-        {this.createNavBar()}
-      </ul>
+      <section className="section">
+        <div className="container level">
+          <nav id="nav" className="level-item">
+            {this.createNavBar()}
+          </nav>
+        </div>
+      </section>
     );
   }
 }

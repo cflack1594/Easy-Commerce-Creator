@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
-import styles from "./ProductCard.module.css";
 import { processFormData } from "utils";
+import "bulma/css/bulma.css";
 export class ProductCard extends React.Component {
   static propTypes = {
     addToCart: PropTypes.func,
@@ -47,6 +47,7 @@ export class ProductCard extends React.Component {
     if (this.props.loggedIn)
       return (
         <button
+          className="button is-rounded is-danger"
           name="deleteItem"
           id="deleteItem"
           onClick={(e) => this.handleClick(e.target)}
@@ -57,14 +58,15 @@ export class ProductCard extends React.Component {
   };
   createProductCard = (product) => {
     return (
-      <div id="ProductCard" className={styles.ProductCard}>
+      <div id="ProductCard" className="column is-one-fifth box">
         {/* {ProductImage(product.image)} */}
-        {ProductInfo(product)}
+        <div className="section">{ProductInfo(product)}</div>
         <QuantityController
           quantity={this.state.quantity}
           quantityChange={this.quantityChanger}
         />
         <button
+          className="button is-rounded is-success is-active"
           name="addItem"
           id="addItem"
           onClick={(e) => this.handleClick(e.target)}

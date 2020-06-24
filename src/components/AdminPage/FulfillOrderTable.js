@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import styles from "./FulfillTable.module.css";
+import "bulma/css/bulma.css";
 export class FulfillOrderTable extends React.Component {
   static propTypes = {
     updateSale: PropTypes.func,
@@ -21,7 +21,7 @@ export class FulfillOrderTable extends React.Component {
 
   createOrderDisplayTable = (orders) => {
     return orders.length ? (
-      <table className={styles.table}>
+      <Fragment>
         <thead>
           <tr>
             <th>Order ID</th>
@@ -30,15 +30,13 @@ export class FulfillOrderTable extends React.Component {
           </tr>
         </thead>
         <tbody>{this.makeOrderMarkup(orders)}</tbody>
-      </table>
+      </Fragment>
     ) : (
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>No Orders to complete</th>
-          </tr>
-        </thead>
-      </table>
+      <thead>
+        <tr>
+          <th>No Orders to complete</th>
+        </tr>
+      </thead>
     );
   };
 
@@ -75,6 +73,10 @@ export class FulfillOrderTable extends React.Component {
   );
 
   render() {
-    return this.createOrderDisplayTable(this.state.orders);
+    return (
+      <table className="table box is-striped is-bordered">
+        {this.createOrderDisplayTable(this.state.orders)}
+      </table>
+    );
   }
 }

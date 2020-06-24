@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FormInput } from "./FormInput";
-import styles from "./Form.css";
 export class NewProductForm extends React.Component {
   static propTypes = {
     createProduct: PropTypes.func,
@@ -35,10 +34,11 @@ export class NewProductForm extends React.Component {
 
   render() {
     return (
-      <form id="NewProductForm" className={styles}>
-        <p>Create New Product</p>
+      <form id="NewProductForm" className="box">
+        <label className="label">Create New Product</label>
         {this.formInputs}
         <button
+          className="button is-rounded"
           type="submit"
           name="submit"
           onClick={(e) => {

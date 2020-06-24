@@ -17,7 +17,7 @@ export class Login extends React.Component {
     return this.props.loggedIn ? (
       <Logout login={this.props.login} loggedIn={this.props.loggedIn} />
     ) : (
-      <div id="login">
+      <div id="login" className="container box has-background-info-light">
         {/* <SignUp createUser={this.props.createUser} /> */}
         <SignIn
           auth={this.props.auth}
@@ -29,6 +29,10 @@ export class Login extends React.Component {
   };
 
   render() {
-    return this.checkLogin();
+    return (
+      <div className="section columns is-centered is-vcentered">
+        <div>{this.checkLogin()}</div>
+      </div>
+    );
   }
 }

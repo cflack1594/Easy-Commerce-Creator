@@ -9,7 +9,7 @@ export const ProductInfo = (product) => {
       if (dataKey === "price")
         return (
           <p key={index} id={dataKey}>
-            ${product[dataKey]}
+            ${Number.parseFloat(product[dataKey]).toFixed(2)}
           </p>
         );
       return (

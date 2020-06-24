@@ -2,7 +2,7 @@ import React from "react";
 import { Home, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
-//add state proxy for components to work with
+import "bulma/css/bulma.css";
 
 export class App extends React.Component {
   state = {
@@ -118,11 +118,13 @@ export class App extends React.Component {
     switch (page) {
       case "Cart":
         ret = (
-          <Cart
-            addOrder={this.addOrder}
-            cart={this.state.cart}
-            sales={this.state.sales}
-          />
+          <div id="cart" className="section columns is-centered is-vcentered">
+            <Cart
+              addOrder={this.addOrder}
+              cart={this.state.cart}
+              sales={this.state.sales}
+            />
+          </div>
         );
         break;
       case "Home":
@@ -137,14 +139,16 @@ export class App extends React.Component {
         break;
       case "Login":
         ret = (
-          <div>
-            <Login
-              auth={this.state.auth}
-              login={this.login}
-              loggedIn={this.state.loggedIn}
-              createUser={this.createUser}
-            />
-            {this.checkLoginStatus()}
+          <div className="section columns is-centered is-vcentered">
+            <div>
+              <Login
+                auth={this.state.auth}
+                login={this.login}
+                loggedIn={this.state.loggedIn}
+                createUser={this.createUser}
+              />
+              {this.checkLoginStatus()}
+            </div>
           </div>
         );
         break;
@@ -158,7 +162,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="has-background-grey-dark">
         <Nav goToPage={this.goToPage} />
         {this.getPage(this.state.activePage)}
         <Nav goToPage={this.goToPage} />

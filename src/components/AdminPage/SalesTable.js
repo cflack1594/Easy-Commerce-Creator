@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import "bulma/css/bulma.css";
 export class SalesTable extends React.Component {
   static propTypes = {
     sales: PropTypes.array,
@@ -11,7 +11,7 @@ export class SalesTable extends React.Component {
 
   render() {
     return (
-      <table>
+      <table className="box table">
         <thead>
           <tr>
             <th>Total Sales</th>
