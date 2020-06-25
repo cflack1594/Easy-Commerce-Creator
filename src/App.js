@@ -49,7 +49,7 @@ export class App extends React.Component {
   createSale = async (order) => {
     await api
       .postData(order, "http://localhost:3001/api/sales/sales")
-      .then(window.location.reload(false));
+      .then(window.location.reload());
   };
 
   updateSale = async (order) => {
@@ -77,6 +77,7 @@ export class App extends React.Component {
     order.completed = false;
 
     this.createSale(order);
+    this.setState({ sales: [...this.state.sales, order] });
     this.setState({ cart: [] });
   };
 
