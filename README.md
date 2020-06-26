@@ -1,7 +1,7 @@
 # Easy Commerce Creator
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Easy Commerce Creator is a web application that will allow a business to easily set up an online site for their business
+Easy Commerce Creator is a web application that will allow a business to easily set up an online ordering site for their business
 
 ## 'backend' 📁
 
