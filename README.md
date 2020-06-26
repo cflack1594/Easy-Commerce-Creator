@@ -1,12 +1,13 @@
-# Full Stack Student Starter
+# Easy Commerce Creator
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Easy Commerce Creator is a web application that will allow a business to easily set up an online site for their business
 
 ## 'backend' 📁
 
 You will need to `cd` into this folder and run `npm i`. The 'backend' has its own 'package.json'.
 
-In there, you can do `npm run server` to fire up a server on port `5000`.
+In there, you can do `npm run server` to fire up a server on port `3001`.
 
 ## Available Front-End Scripts
 
