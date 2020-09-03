@@ -113,99 +113,80 @@ export class App extends React.Component {
       />
     ) : null;
 
-  getPage = (page) => {
-    let ret;
+  // getPage = (page) => {
+  //   let ret;
 
-    switch (page) {
-      case "Cart":
-        ret = (
-          <div className=" columns is-centered is-vcentered">
-            <div id="cart" className="column section">
-              <Cart
-                addOrder={this.addOrder}
-                cart={this.state.cart}
-                sales={this.state.sales}
-              />
-            </div>
-          </div>
-        );
-        break;
-      case "Home":
-        ret = (
-          <Home
-            products={this.state.products}
-            addToCart={this.addToCart}
-            deleteProduct={this.deleteProduct}
-            loggedIn={this.state.loggedIn}
-          />
-        );
-        break;
-      case "Login":
-        ret = (
-          <div className="section columns is-centered is-vcentered">
-            <div className="box has-background-dark">
-              <Login
-                auth={this.state.auth}
-                login={this.login}
-                loggedIn={this.state.loggedIn}
-                createUser={this.createUser}
-              />
-              {this.checkLoginStatus()}
-            </div>
-          </div>
-        );
-        break;
-      default:
-        ret = <h1>Page Not Found</h1>;
-        break;
-    }
+  //   switch (page) {
+  //     case "Cart":
+  //       ret = (
+  //         <div className=" columns is-centered is-vcentered">
+  //           <div id="cart" className="column section">
+  //             <Cart
+  //               addOrder={this.addOrder}
+  //               cart={this.state.cart}
+  //               sales={this.state.sales}
+  //             />
+  //           </div>
+  //         </div>
+  //       );
+  //       break;
+  //     case "Home":
+  //       ret = (
+  //         <Home
+  //           products={this.state.products}
+  //           addToCart={this.addToCart}
+  //           deleteProduct={this.deleteProduct}
+  //           loggedIn={this.state.loggedIn}
+  //         />
+  //       );
+  //       break;
+  //     case "Login":
+  //       ret = (
+  //         <div className="section columns is-centered is-vcentered">
+  //           <div className="box has-background-dark">
+  //             <Login
+  //               auth={this.state.auth}
+  //               login={this.login}
+  //               loggedIn={this.state.loggedIn}
+  //               createUser={this.createUser}
+  //             />
+  //             {this.checkLoginStatus()}
+  //           </div>
+  //         </div>
+  //       );
+  //       break;
+  //     default:
+  //       ret = <h1>Page Not Found</h1>;
+  //       break;
+  //   }
 
-    return ret;
-  };
+  //   return ret;
+  // };
+
+  // render() {
+  //   return (
+  //     <div className="has-background-grey-dark">
+  //       <Nav goToPage={this.goToPage} />
+  //       {this.getPage(this.state.activePage)}
+  //       <Nav goToPage={this.goToPage} />
+  //     </div>
+  //   );
+  // }
 
   render() {
     return (
-      <div className="has-background-grey-dark">
-        <Nav goToPage={this.goToPage} />
-        {this.getPage(this.state.activePage)}
-        <Nav goToPage={this.goToPage} />
-      </div>
+      <Router>
+        <div className="has-background-grey-dark">
+          <Nav />
+          {/* <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/admin" component={AdminPage} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/login" component={Login} />
+          </Switch> */}
+          <Nav />
+        </div>
+      </Router>
     );
   }
 }
-
-//routing = (
-//   <Router>
-//     <div>
-//       <ul>
-//         <li>
-//           <Link to="/" component={App}>
-//             Home
-//           </Link>
-//         </li>
-//         <li>
-//           <Link
-//             to={{
-//               pathname: "/login",
-//               props: {
-//                 auth: this.state.auth,
-//                 login: this.login,
-//                 loggedIn: this.state.loggedIn,
-//               },
-//             }}
-//           >
-//             Login
-//           </Link>
-//         </li>
-//         <li>
-//           <Link to="/Admin">Admin</Link>
-//         </li>
-//       </ul>
-//       <Switch>
-//         <Route exact path="/" component={this} />
-//         <Route exact path="/Login" component={components.Login loggedIn={this.state.login}} />
-//         <Route exact path="/Admin" component={components.AdminPage} />
-//       </Switch>
-//     </div>
-//   </Router>
-// );
