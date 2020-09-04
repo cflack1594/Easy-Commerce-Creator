@@ -4,7 +4,6 @@ import * as api from "api";
 import {
   BrowserRouter as Router,
   Switch,
-  Link,
   Route,
   Redirect,
 } from "react-router-dom";

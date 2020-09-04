@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { ProductImage } from "./ProductImg";
 import { ProductInfo } from "./ProductInfo";
 import { QuantityController } from "./QuantityController";
-import { processFormData } from "utils";
 import "bulma/css/bulma.css";
 export class ProductCard extends React.Component {
   static propTypes = {

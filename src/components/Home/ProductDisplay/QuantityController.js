@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "bulma/css/bulma.css";
 export class QuantityController extends React.Component {
