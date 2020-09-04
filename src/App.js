@@ -1,7 +1,13 @@
 import React from "react";
 import { Home, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Link,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import "bulma/css/bulma.css";
 
 export class App extends React.Component {
@@ -11,7 +17,6 @@ export class App extends React.Component {
     products: [],
     sales: [],
     loggedIn: false,
-    activePage: "Home",
   };
 
   // AppContext = React.createContext(this.state);
@@ -101,19 +106,31 @@ export class App extends React.Component {
     this.setState({ loggedIn: status });
   };
 
-  goToPage = (link) => {
-    this.setState({ activePage: link });
-  };
-
   checkLoginStatus = () =>
     this.state.loggedIn ? (
-      <AdminPage
-        createProduct={this.createProduct}
-        addOrder={this.addOrder}
-        updateSale={this.updateSale}
-        sales={this.state.sales}
-      />
-    ) : null;
+      <Switch>
+        <Redirect from="/login" to="/admin" />
+        <Route path="/admin">
+          <AdminPage
+            createProduct={this.createProduct}
+            addOrder={this.addOrder}
+            updateSale={this.updateSale}
+            sales={this.state.sales}
+          />
+        </Route>
+      </Switch>
+    ) : (
+      <div className="section columns is-centered is-vcentered">
+        <div className="box has-background-dark">
+          <Login
+            auth={this.state.auth}
+            login={this.login}
+            loggedIn={this.state.loggedIn}
+            createUser={this.createUser}
+          />
+        </div>
+      </div>
+    );
 
   render() {
     return (
@@ -147,22 +164,8 @@ export class App extends React.Component {
                 </div>
               )}
             />
-            <Route
-              path="/login"
-              render={() => (
-                <div className="section columns is-centered is-vcentered">
-                  <div className="box has-background-dark">
-                    <Login
-                      auth={this.state.auth}
-                      login={this.login}
-                      loggedIn={this.state.loggedIn}
-                      createUser={this.createUser}
-                    />
-                    {this.checkLoginStatus()}
-                  </div>
-                </div>
-              )}
-            />
+            <Route path="/login" render={() => this.checkLoginStatus()} />
+            <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
           <Nav />
         </div>
