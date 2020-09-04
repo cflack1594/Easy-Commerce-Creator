@@ -106,31 +106,36 @@ export class App extends React.Component {
     this.setState({ loggedIn: status });
   };
 
-  checkLoginStatus = () =>
-    this.state.loggedIn ? (
-      <Switch>
-        <Redirect from="/login" to="/admin" />
-        <Route path="/admin">
-          <AdminPage
-            createProduct={this.createProduct}
-            addOrder={this.addOrder}
-            updateSale={this.updateSale}
-            sales={this.state.sales}
-          />
-        </Route>
-      </Switch>
-    ) : (
-      <div className="section columns is-centered is-vcentered">
-        <div className="box has-background-dark">
-          <Login
-            auth={this.state.auth}
-            login={this.login}
-            loggedIn={this.state.loggedIn}
-            createUser={this.createUser}
-          />
-        </div>
+  checkLoginStatus = () => (
+    <div className="section columns is-centered is-vcentered">
+      <div className="box has-background-dark">
+        <Login
+          auth={this.state.auth}
+          login={this.login}
+          loggedIn={this.state.loggedIn}
+          createUser={this.createUser}
+        />
+        {this.state.loggedIn ? (
+          <Switch>
+            <Redirect from="/login" to="/admin" />
+            <Route path="/admin">
+              <AdminPage
+                createProduct={this.createProduct}
+                addOrder={this.addOrder}
+                updateSale={this.updateSale}
+                sales={this.state.sales}
+              />
+            </Route>
+          </Switch>
+        ) : (
+          <Switch>
+            <Redirect to="/login" />
+            <Route path="/login"></Route>
+          </Switch>
+        )}
       </div>
-    );
+    </div>
+  );
 
   render() {
     return (
