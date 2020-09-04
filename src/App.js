@@ -14,6 +14,8 @@ export class App extends React.Component {
     activePage: "Home",
   };
 
+  // AppContext = React.createContext(this.state);
+
   async componentDidMount() {
     try {
       this.setState({
@@ -113,77 +115,55 @@ export class App extends React.Component {
       />
     ) : null;
 
-  // getPage = (page) => {
-  //   let ret;
-
-  //   switch (page) {
-  //     case "Cart":
-  //       ret = (
-  //         <div className=" columns is-centered is-vcentered">
-  //           <div id="cart" className="column section">
-  //             <Cart
-  //               addOrder={this.addOrder}
-  //               cart={this.state.cart}
-  //               sales={this.state.sales}
-  //             />
-  //           </div>
-  //         </div>
-  //       );
-  //       break;
-  //     case "Home":
-  //       ret = (
-  //         <Home
-  //           products={this.state.products}
-  //           addToCart={this.addToCart}
-  //           deleteProduct={this.deleteProduct}
-  //           loggedIn={this.state.loggedIn}
-  //         />
-  //       );
-  //       break;
-  //     case "Login":
-  //       ret = (
-  //         <div className="section columns is-centered is-vcentered">
-  //           <div className="box has-background-dark">
-  //             <Login
-  //               auth={this.state.auth}
-  //               login={this.login}
-  //               loggedIn={this.state.loggedIn}
-  //               createUser={this.createUser}
-  //             />
-  //             {this.checkLoginStatus()}
-  //           </div>
-  //         </div>
-  //       );
-  //       break;
-  //     default:
-  //       ret = <h1>Page Not Found</h1>;
-  //       break;
-  //   }
-
-  //   return ret;
-  // };
-
-  // render() {
-  //   return (
-  //     <div className="has-background-grey-dark">
-  //       <Nav goToPage={this.goToPage} />
-  //       {this.getPage(this.state.activePage)}
-  //       <Nav goToPage={this.goToPage} />
-  //     </div>
-  //   );
-  // }
-
   render() {
     return (
       <Router>
         <div className="has-background-grey-dark">
           <Nav />
-          {/* <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/admin" component={AdminPage} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/login" component={Login} />
-          </Switch> */}
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <Home
+                  products={this.state.products}
+                  addToCart={this.addToCart}
+                  deleteProduct={this.deleteProduct}
+                  loggedIn={this.state.loggedIn}
+                />
+              )}
+            />
+            <Route
+              path="/cart"
+              render={() => (
+                <div className=" columns is-centered is-vcentered">
+                  <div id="cart" className="column section">
+                    <Cart
+                      addOrder={this.addOrder}
+                      cart={this.state.cart}
+                      sales={this.state.sales}
+                    />
+                  </div>
+                </div>
+              )}
+            />
+            <Route
+              path="/login"
+              render={() => (
+                <div className="section columns is-centered is-vcentered">
+                  <div className="box has-background-dark">
+                    <Login
+                      auth={this.state.auth}
+                      login={this.login}
+                      loggedIn={this.state.loggedIn}
+                      createUser={this.createUser}
+                    />
+                    {this.checkLoginStatus()}
+                  </div>
+                </div>
+              )}
+            />
+          </Switch>
           <Nav />
         </div>
       </Router>
