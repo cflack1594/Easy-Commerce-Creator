@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Login, AdminPage, Cart, Nav } from "components";
+import { ProductPage, Login, AdminPage, Cart, Nav } from "components";
 import * as api from "api";
 import {
   BrowserRouter as Router,
@@ -146,7 +146,7 @@ export class App extends React.Component {
               path="/"
               exact
               render={() => (
-                <Home
+                <ProductPage
                   products={this.state.products}
                   addToCart={this.addToCart}
                   deleteProduct={this.deleteProduct}
