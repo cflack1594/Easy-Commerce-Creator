@@ -1,5 +1,13 @@
 import React from "react";
-import { ProductPage, Login, AdminPage, Cart, Nav } from "components";
+import {
+  ProductPage,
+  Login,
+  AdminPage,
+  Cart,
+  ShopNav,
+  HomeNav,
+  Home,
+} from "components";
 import * as api from "api";
 import {
   BrowserRouter as Router,
@@ -17,8 +25,6 @@ export class App extends React.Component {
     sales: [],
     loggedIn: false,
   };
-
-  // AppContext = React.createContext(this.state);
 
   async componentDidMount() {
     try {
@@ -140,11 +146,11 @@ export class App extends React.Component {
     return (
       <Router>
         <div className="has-background-grey-dark">
-          <Nav />
+          <ShopNav />
           <Switch>
+            <Route path="/" exact component={Home} />
             <Route
-              path="/"
-              exact
+              path="/shop"
               render={() => (
                 <ProductPage
                   products={this.state.products}
@@ -171,7 +177,7 @@ export class App extends React.Component {
             <Route path="/login" render={() => this.checkLoginStatus()} />
             <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
-          <Nav />
+          <ShopNav />
         </div>
       </Router>
     );
