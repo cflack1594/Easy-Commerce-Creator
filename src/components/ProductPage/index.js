@@ -1,4 +1,4 @@
-import { Header } from "./Header";
+import { Header } from "./Header.js";
 import { ProductDisplay } from "./ProductDisplay";
 import React from "react";
 import PropTypes from "prop-types";
