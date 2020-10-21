@@ -1,6 +1,6 @@
-export { AdminPage } from "./AdminPage";
-export { Login } from "./Login/index";
-export { ProductPage } from "./ProductPage";
-export { Cart } from "./Cart.js";
-export { ShopNav } from "./ShopNav.js";
-export { Home } from "./Home";
+export { AdminPage } from "./ShopSitePage";
+export { Login } from "./ShopSitePage";
+export { ProductPage } from "./ShopSitePage";
+export { Cart } from "./ShopSitePage";
+export { ShopNav } from "./ShopSitePage";
+export { Home } from "./LandingPage";

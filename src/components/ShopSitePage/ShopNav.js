@@ -6,6 +6,9 @@ import logo from "images/easyCommerceLogo.png";
 export class ShopNav extends React.Component {
   createNavBar = () => (
     <nav id="nav" className="level-item">
+      <Link to="/" className="link is-info has-text-link-light">
+        <li>Home</li>
+      </Link>
       <Link to="/shop" className="link is-info has-text-link-light">
         <li>Shop</li>
       </Link>
