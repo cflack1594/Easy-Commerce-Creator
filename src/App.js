@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  ProductPage,
-  Login,
-  AdminPage,
-  Cart,
-  ShopNav,
-  HomeNav,
-  Home,
-} from "components";
+import { ShopSitePage, Home } from "components";
 import * as api from "api";
 import {
   BrowserRouter as Router,
@@ -120,75 +112,21 @@ export class App extends React.Component {
     this.setState({ loggedIn: status });
   };
 
-  checkLoginStatus = () => (
-    <div className="section columns is-centered is-vcentered">
-      <div className="box has-background-dark">
-        <Login
-          auth={this.state.auth}
-          login={this.login}
-          loggedIn={this.state.loggedIn}
-          createUser={this.createUser}
-        />
-        {this.state.loggedIn ? (
-          <Switch>
-            <Redirect from="/login" to="/admin" />
-            <Route path="/admin">
-              <AdminPage
-                createProduct={this.createProduct}
-                addOrder={this.addOrder}
-                updateSale={this.updateSale}
-                sales={this.state.sales}
-              />
-            </Route>
-          </Switch>
-        ) : (
-          <Switch>
-            <Redirect to="/login" />
-            <Route path="/login"></Route>
-          </Switch>
-        )}
-      </div>
-    </div>
-  );
-
   render() {
     return (
-      <Router>
-        <div className="has-background-grey-dark">
-          <ShopNav />
+      <div className="has-background-grey-dark">
+        <Router>
           <Switch>
             <Route path="/" exact component={Home} />
+          </Switch>
+          <Switch>
             <Route
               path="/shop"
-              render={() => (
-                <ProductPage
-                  products={this.state.products}
-                  addToCart={this.addToCart}
-                  deleteProduct={this.deleteProduct}
-                  loggedIn={this.state.loggedIn}
-                />
-              )}
+              render={() => <ShopSitePage state={this.state} />}
             />
-            <Route
-              path="/cart"
-              render={() => (
-                <div className=" columns is-centered is-vcentered">
-                  <div id="cart" className="column section">
-                    <Cart
-                      addOrder={this.addOrder}
-                      cart={this.state.cart}
-                      sales={this.state.sales}
-                    />
-                  </div>
-                </div>
-              )}
-            />
-            <Route path="/login" render={() => this.checkLoginStatus()} />
-            <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
-          <ShopNav />
-        </div>
-      </Router>
+        </Router>
+      </div>
     );
   }
 }
