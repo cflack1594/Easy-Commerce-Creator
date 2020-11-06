@@ -3,7 +3,7 @@ import React from "react";
 import { ProductCard } from "./ProductCard";
 import "bulma/css/bulma.css";
 
-export class ProductDisplay extends React.Component {
+export class ProductPage extends React.Component {
   static propTypes = {
     addToCart: PropTypes.func,
     deleteProduct: PropTypes.func,
@@ -25,11 +25,19 @@ export class ProductDisplay extends React.Component {
 
   render() {
     return (
-      <div
-        id="ProductList"
-        className="container columns is-multiline is-centered is-4"
-      >
-        {this.createProductCards(this.props.products)}
+      <div className="container box has-background-dark">
+        <div id="header" className="section">
+          <h1 className="container title is-1  has-text-primary-light">
+            Welcome!
+          </h1>
+        </div>
+
+        <div
+          id="ProductList"
+          className="container columns is-multiline is-centered is-4"
+        >
+          {this.createProductCards(this.props.products)}
+        </div>
       </div>
     );
   }

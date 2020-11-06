@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Login, AdminPage, Cart, Nav } from "components";
+import { Home, Login, AdminPage, Cart, ShopNav, ProductPage } from "components";
 import * as api from "api";
 import {
   BrowserRouter as Router,
@@ -18,8 +18,6 @@ export class App extends React.Component {
     loggedIn: false,
   };
 
-  // AppContext = React.createContext(this.state);
-
   async componentDidMount() {
     try {
       this.setState({
@@ -34,12 +32,19 @@ export class App extends React.Component {
     }
   }
 
+  //this function servers as a placeholder
+  //It is invoked to update state after a data on the server has changed
+  updateState = async (stateVar, databaseLink) => {
+    this.setState({ [stateVar]: await api.getData(databaseLink) });
+  };
+
   createProduct = async (newProduct) => {
     await api.postData(
       newProduct,
       "http://localhost:3001/api/products/products"
     );
-    this.setState({ products: [...this.state.products, newProduct] });
+
+    this.updateState("products", "http://localhost:3001/api/products/products");
   };
 
   deleteProduct = async (product) => {
@@ -47,15 +52,16 @@ export class App extends React.Component {
       product,
       "http://localhost:3001/api/products/products"
     );
-    this.setState({
-      products: this.state.products.filter((item) => item._id !== product._id),
-    });
+
+    this.updateState("products", "http://localhost:3001/api/products/products");
   };
 
   createSale = async (order) => {
-    await api
-      .postData(order, "http://localhost:3001/api/sales/sales")
-      .then(window.location.reload());
+    await api.postData(order, "http://localhost:3001/api/sales/sales");
+
+    this.updateState("sales", "http://localhost:3001/api/sales/sales").then(
+      window.location.reload()
+    );
   };
 
   updateSale = async (order) => {
@@ -67,7 +73,8 @@ export class App extends React.Component {
     await api.postData(newUser, "http://localhost:3001/api/auth/auth");
   };
 
-  addOrder = (newOrder) => {
+  //On checkout this function creates the data for a sale and sends it to the administrator side where they can review and fulfill the order for the customer
+  addOrder = async (newOrder) => {
     const order = newOrder.reduce((acc, current) => {
       acc.price
         ? (acc.price += Number.parseFloat(current.price * current.quantity))
@@ -83,7 +90,7 @@ export class App extends React.Component {
     order.completed = false;
 
     this.createSale(order);
-    this.setState({ sales: [...this.state.sales, order] });
+
     this.setState({ cart: [] });
   };
 
@@ -140,13 +147,13 @@ export class App extends React.Component {
     return (
       <Router>
         <div className="has-background-grey-dark">
-          <Nav />
+          <ShopNav loggedIn={this.state.loggedIn} />
           <Switch>
+            <Route path exact="/" component={Home} />
             <Route
-              path="/"
-              exact
+              path="/shop"
               render={() => (
-                <Home
+                <ProductPage
                   products={this.state.products}
                   addToCart={this.addToCart}
                   deleteProduct={this.deleteProduct}
@@ -171,7 +178,7 @@ export class App extends React.Component {
             <Route path="/login" render={() => this.checkLoginStatus()} />
             <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
-          <Nav />
+          <ShopNav loggedIn={this.state.loggedIn} />
         </div>
       </Router>
     );
