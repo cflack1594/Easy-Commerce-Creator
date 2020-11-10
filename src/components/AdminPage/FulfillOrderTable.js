@@ -76,10 +76,12 @@ export class FulfillOrderTable extends React.Component {
 
   render() {
     return (
-      <table className="table box is-striped is-bordered">
+      <div className="box">
         <label className="label title is-5">Incoming Orders</label>
-        {this.createOrderDisplayTable(this.state.orders)}
-      </table>
+        <table className="table is-striped is-bordered">
+          {this.createOrderDisplayTable(this.state.orders)}
+        </table>
+      </div>
     );
   }
 }
