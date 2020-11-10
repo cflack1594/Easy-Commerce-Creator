@@ -1,5 +1,13 @@
 import React from "react";
-import { Home, Login, AdminPage, Cart, ShopNav, ProductPage } from "components";
+import {
+  Home,
+  Login,
+  AdminPage,
+  Cart,
+  Nav,
+  ProductPage,
+  RegisterSite,
+} from "components";
 import * as api from "api";
 import {
   BrowserRouter as Router,
@@ -16,6 +24,7 @@ export class App extends React.Component {
     products: [],
     sales: [],
     loggedIn: false,
+    activePage: "",
   };
 
   async componentDidMount() {
@@ -36,6 +45,21 @@ export class App extends React.Component {
   //It is invoked to update state after a data on the server has changed
   updateState = async (stateVar, databaseLink) => {
     this.setState({ [stateVar]: await api.getData(databaseLink) });
+  };
+
+  createData = async (newData, dataTarget) => {
+    await api.postData(newData, dataTarget);
+    this.updateState(dataTarget);
+  };
+
+  updateData = async (newData, dataTarget) => {
+    await api.updateData(newData, dataTarget);
+    this.updateState(dataTarget);
+  };
+
+  deleteData = async (currentData, dataTarget) => {
+    await api.deleteData(currentData, dataTarget);
+    this.updateState(dataTarget);
   };
 
   createProduct = async (newProduct) => {
@@ -147,9 +171,10 @@ export class App extends React.Component {
     return (
       <Router>
         <div className="has-background-grey-dark">
-          <ShopNav loggedIn={this.state.loggedIn} />
+          <Nav loggedIn={this.state.loggedIn} />
           <Switch>
             <Route path exact="/" component={Home} />
+            <Route path="/register-new-site" component={RegisterSite} />
             <Route
               path="/shop"
               render={() => (
@@ -178,7 +203,7 @@ export class App extends React.Component {
             <Route path="/login" render={() => this.checkLoginStatus()} />
             <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
-          <ShopNav loggedIn={this.state.loggedIn} />
+          <Nav loggedIn={this.state.loggedIn} />
         </div>
       </Router>
     );
