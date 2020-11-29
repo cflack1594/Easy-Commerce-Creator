@@ -7,6 +7,7 @@ import logo from "images/easyCommerceLogo.png";
 export class Nav extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
+    activeLink: PropTypes.string,
   };
 
   checkLogin = () => {
@@ -21,42 +22,51 @@ export class Nav extends React.Component {
     );
   };
 
-  createShopNavMarkup = () => (
-    <nav id="nav" className="level-item">
-      <Link to="/" className="link is-info has-text-link-light">
-        <li>Home</li>
-      </Link>
-      <Link to="/shop" className="link is-info has-text-link-light">
-        <li>Shop</li>
-      </Link>
-      <Link to="/cart" className="link is-info has-text-link-light">
-        <li>Cart</li>
-      </Link>
+  createNavMarkup = () => {
+    if (
+      this.props.activeLink === "http://localhost:3000/" ||
+      this.props.activeLink.includes("register")
+    )
+      return (
+        <nav id="nav" className="level-item">
+          <Link to="/" className="link is-info has-text-link-light">
+            <li>Home</li>
+          </Link>
+          <Link
+            to="/register-new-site"
+            className="link is-info has-text-link-light"
+          >
+            <li>Register</li>
+          </Link>
+          <Link to="/shop" className="link is-info has-text-link-light">
+            <li>Sample Website</li>
+          </Link>
+        </nav>
+      );
 
-      {this.checkLogin()}
-    </nav>
-  );
+    return (
+      <nav id="nav" className="level-item">
+        <Link to="/" className="link is-info has-text-link-light">
+          <li>Home</li>
+        </Link>
+        <Link to="/shop" className="link is-info has-text-link-light">
+          <li>Shop</li>
+        </Link>
+        <Link to="/cart" className="link is-info has-text-link-light">
+          <li>Cart</li>
+        </Link>
 
-  createHomeNavMarkup = () => (
-    <nav id="nav" className="level-item">
-      <Link to="/" className="link is-info has-text-link-light">
-        <li>Home</li>
-      </Link>
-      <Link
-        to="/register-new-site"
-        className="link is-info has-text-link-light"
-      >
-        <li>Register</li>
-      </Link>
-    </nav>
-  );
+        {this.checkLogin()}
+      </nav>
+    );
+  };
 
   render() {
     return (
       <section id="navSection" className="section">
         <div className="container level">
           <img src={logo} alt="logo"></img>
-          {this.createShopNavMarkup()}
+          {this.createNavMarkup()}
         </div>
       </section>
     );

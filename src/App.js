@@ -24,7 +24,8 @@ export class App extends React.Component {
     products: [],
     sales: [],
     loggedIn: false,
-    activePage: "",
+    activeDBTarget: "",
+    activeLink: "register",
   };
 
   async componentDidMount() {
@@ -35,6 +36,7 @@ export class App extends React.Component {
         ),
         sales: await api.getData("http://localhost:3001/api/sales/sales"),
         auth: await api.getData("http://localhost:3001/api/auth/auth"),
+        activeLink: window.location.href,
       });
     } catch (e) {
       throw Error(e);
@@ -43,24 +45,25 @@ export class App extends React.Component {
 
   //this function servers as a placeholder
   //It is invoked to update state after a data on the server has changed
-  updateState = async (stateVar, databaseLink) => {
+  updateStateFromServer = async (stateVar, databaseLink) => {
     this.setState({ [stateVar]: await api.getData(databaseLink) });
   };
 
-  createData = async (newData, dataTarget) => {
-    await api.postData(newData, dataTarget);
-    this.updateState(dataTarget);
-  };
+  //these functions will be used after refactoring the interactivity functions below them
+  // createData = async (newData, dataTarget) => {
+  //   await api.postData(newData, dataTarget);
+  //   this.updateStateFromServer(dataTarget);
+  // };
 
-  updateData = async (newData, dataTarget) => {
-    await api.updateData(newData, dataTarget);
-    this.updateState(dataTarget);
-  };
+  // updateData = async (newData, dataTarget) => {
+  //   await api.updateData(newData, dataTarget);
+  //   this.updateStateFromServer(dataTarget);
+  // };
 
-  deleteData = async (currentData, dataTarget) => {
-    await api.deleteData(currentData, dataTarget);
-    this.updateState(dataTarget);
-  };
+  // deleteData = async (currentData, dataTarget) => {
+  //   await api.deleteData(currentData, dataTarget);
+  //   this.updateStateFromServer(dataTarget);
+  // };
 
   createProduct = async (newProduct) => {
     await api.postData(
@@ -68,7 +71,10 @@ export class App extends React.Component {
       "http://localhost:3001/api/products/products"
     );
 
-    this.updateState("products", "http://localhost:3001/api/products/products");
+    this.updateStateFromServer(
+      "products",
+      "http://localhost:3001/api/products/products"
+    );
   };
 
   deleteProduct = async (product) => {
@@ -77,15 +83,19 @@ export class App extends React.Component {
       "http://localhost:3001/api/products/products"
     );
 
-    this.updateState("products", "http://localhost:3001/api/products/products");
+    this.updateStateFromServer(
+      "products",
+      "http://localhost:3001/api/products/products"
+    );
   };
 
   createSale = async (order) => {
     await api.postData(order, "http://localhost:3001/api/sales/sales");
 
-    this.updateState("sales", "http://localhost:3001/api/sales/sales").then(
-      window.location.reload()
-    );
+    this.updateStateFromServer(
+      "sales",
+      "http://localhost:3001/api/sales/sales"
+    ).then(window.location.reload());
   };
 
   updateSale = async (order) => {
@@ -136,6 +146,14 @@ export class App extends React.Component {
     this.setState({ loggedIn: status });
   };
 
+  setDBTarget = (page) => {
+    this.setState({ activeDBTarget: page });
+  };
+
+  setActiveLink = (currentLink) => {
+    this.setState({ activeLink: currentLink });
+  };
+
   checkLoginStatus = () => (
     <div className="section columns is-centered is-vcentered">
       <div className="box has-background-dark">
@@ -171,9 +189,16 @@ export class App extends React.Component {
     return (
       <Router>
         <div className="has-background-grey-dark">
-          <Nav loggedIn={this.state.loggedIn} />
+          <Nav
+            loggedIn={this.state.loggedIn}
+            activeLink={this.state.activeLink}
+          />
           <Switch>
-            <Route path exact="/" component={Home} />
+            <Route
+              path
+              exact="/"
+              render={() => <Home setActiveLink={this.setActiveLink} />}
+            />
             <Route path="/register-new-site" component={RegisterSite} />
             <Route
               path="/shop"
@@ -183,27 +208,27 @@ export class App extends React.Component {
                   addToCart={this.addToCart}
                   deleteProduct={this.deleteProduct}
                   loggedIn={this.state.loggedIn}
+                  setActiveLink={this.setActiveLink}
                 />
               )}
             />
             <Route
               path="/cart"
               render={() => (
-                <div className=" columns is-centered is-vcentered">
-                  <div id="cart" className="column section">
-                    <Cart
-                      addOrder={this.addOrder}
-                      cart={this.state.cart}
-                      sales={this.state.sales}
-                    />
-                  </div>
-                </div>
+                <Cart
+                  addOrder={this.addOrder}
+                  cart={this.state.cart}
+                  sales={this.state.sales}
+                />
               )}
             />
             <Route path="/login" render={() => this.checkLoginStatus()} />
             <Route path="/admin" render={() => this.checkLoginStatus()} />
           </Switch>
-          <Nav loggedIn={this.state.loggedIn} />
+          <Nav
+            loggedIn={this.state.loggedIn}
+            activeLink={this.state.activeLink}
+          />
         </div>
       </Router>
     );

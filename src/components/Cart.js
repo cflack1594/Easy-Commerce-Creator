@@ -53,64 +53,72 @@ export class Cart extends React.Component {
 
   render() {
     return this.props.cart.length ? (
-      <table
-        id="cart"
-        className="box table is-striped is-full-width has-background-info-light"
-      >
-        <thead>
-          <tr>
-            {this.headers.map((header, index) => {
-              if (header === "Name")
-                return (
-                  <th id="cartProductName" key={index} colSpan="2">
-                    {header}
-                  </th>
-                );
-              return <th key={index}>{header}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.cart.map((cartItem, index) => (
-            <tr key={index}>{this.createCartItem(cartItem)}</tr>
-          ))}
-          <tr id="checkout">
-            <td>
-              <strong>Grand Total:</strong>
-            </td>
-            <td>
-              <strong className="has-text-primary-dark">
-                {formatter.format(
-                  this.props.cart.reduce(
-                    (acc, item) => (acc += item.price * item.quantity),
-                    0
-                  )
-                )}
-              </strong>
-            </td>
-            <td>
-              <button
-                className="button is-rounded has-background-success-light has-text-black-bis"
-                type="button"
-                name="checkout"
-                onClick={this.handleClick}
-              >
-                Checkout
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className=" columns is-centered is-vcentered">
+        <div id="cart" className="column section">
+          <table
+            id="cart"
+            className="box table is-striped is-full-width has-background-info-light"
+          >
+            <thead>
+              <tr>
+                {this.headers.map((header, index) => {
+                  if (header === "Name")
+                    return (
+                      <th id="cartProductName" key={index} colSpan="2">
+                        {header}
+                      </th>
+                    );
+                  return <th key={index}>{header}</th>;
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.cart.map((cartItem, index) => (
+                <tr key={index}>{this.createCartItem(cartItem)}</tr>
+              ))}
+              <tr id="checkout">
+                <td>
+                  <strong>Grand Total:</strong>
+                </td>
+                <td>
+                  <strong className="has-text-primary-dark">
+                    {formatter.format(
+                      this.props.cart.reduce(
+                        (acc, item) => (acc += item.price * item.quantity),
+                        0
+                      )
+                    )}
+                  </strong>
+                </td>
+                <td>
+                  <button
+                    className="button is-rounded has-background-success-light has-text-black-bis"
+                    type="button"
+                    name="checkout"
+                    onClick={this.handleClick}
+                  >
+                    Checkout
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     ) : (
-      <table id="emptyCart" className="box table has-background-info-light">
-        <tbody>
-          <tr>
-            <td id="emptyCart">
-              <strong>Nothing in Cart</strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className=" columns is-centered is-vcentered">
+        <div id="cart" className="column section">
+          <table id="emptyCart" className="box table has-background-info-light">
+            <tbody>
+              <tr>
+                <td id="emptyCart">
+                  <strong>Nothing in Cart</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 }

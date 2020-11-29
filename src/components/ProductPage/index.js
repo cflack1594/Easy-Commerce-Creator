@@ -9,7 +9,12 @@ export class ProductPage extends React.Component {
     deleteProduct: PropTypes.func,
     products: PropTypes.array,
     loggedIn: PropTypes.bool,
+    setActiveLink: PropTypes.func,
   };
+
+  componentDidMount() {
+    this.props.setActiveLink(window.location.href);
+  }
 
   createProductCards = (products) =>
     products.map((product, index) => (

@@ -4,4 +4,4 @@ export { Home } from "./Home";
 export { Cart } from "./Cart.js";
 export { Nav } from "./Nav.js";
 export { ProductPage } from "./ProductPage";
-export { RegisterSite } from "./RegisterSite";
+export { RegisterSite } from "./RegisterSite.js";

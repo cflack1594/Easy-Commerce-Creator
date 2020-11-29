@@ -1,7 +1,15 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 export class Home extends React.Component {
   heading = "Welcome!";
+
+  static propTypes = {
+    setActiveLink: PropTypes.func,
+  };
+
+  componentDidMount() {
+    this.props.setActiveLink(window.location.href);
+  }
 
   render() {
     return (
