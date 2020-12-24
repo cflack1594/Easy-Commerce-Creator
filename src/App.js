@@ -30,12 +30,20 @@ export class App extends React.Component {
 
   async componentDidMount() {
     try {
+      // these links are hard coded as the default when the site is first loaded
       this.setState({
         products: await api.getData(
+          "ecommerce-site-demo",
           "http://localhost:3001/api/products/products"
         ),
-        sales: await api.getData("http://localhost:3001/api/sales/sales"),
-        auth: await api.getData("http://localhost:3001/api/auth/auth"),
+        sales: await api.getData(
+          "ecommerce-site-demo",
+          "http://localhost:3001/api/sales/sales"
+        ),
+        auth: await api.getData(
+          "ecommerce-site-demo",
+          "http://localhost:3001/api/auth/auth"
+        ),
         activeLink: window.location.href,
       });
     } catch (e) {

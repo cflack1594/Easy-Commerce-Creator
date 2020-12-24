@@ -1,4 +1,4 @@
-export const getData = async (url) => {
+export const getData = async (dbName, url) => {
   try {
     const resp = await window.fetch(url);
     return resp.json();
