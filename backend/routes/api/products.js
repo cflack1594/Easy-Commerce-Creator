@@ -9,7 +9,7 @@ router.get("/test", (_, res) => {
 
 router.get("/products", async (_, res) => {
   try {
-    res.json(await getCollection("sample-products"));
+    res.json(await getCollection("ecommerce-site-demo", "products"));
   } catch (e) {
     throw Error(e);
   }
@@ -17,7 +17,7 @@ router.get("/products", async (_, res) => {
 
 router.post("/products", async (req, res) => {
   try {
-    res.send(await addData(req.body, "sample-products"));
+    res.send(await addData(req.body, "ecommerce-site-demo", "products"));
   } catch (e) {
     throw Error(e);
   }
@@ -25,7 +25,7 @@ router.post("/products", async (req, res) => {
 
 router.delete("/products", async (req, res) => {
   try {
-    res.send(await deleteData(req.body._id, "sample-products"));
+    res.send(await deleteData(req.body._id, "ecommerce-site-demo", "products"));
   } catch (e) {
     throw Error(e);
   }

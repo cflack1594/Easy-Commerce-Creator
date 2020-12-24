@@ -1,12 +1,9 @@
 import { client } from "./client";
 import { ObjectID } from "mongodb";
 
-export const getCollection = async (collectionName) => {
+export const getCollection = async (dbName, collectionName) => {
   try {
-    const cursor = await client
-      .db("ecommerce-site-demo")
-      .collection(collectionName)
-      .find();
+    const cursor = await client.db(dbName).collection(collectionName).find();
     const results = await cursor.toArray();
     await cursor.close();
     return results;
@@ -15,12 +12,12 @@ export const getCollection = async (collectionName) => {
   }
 };
 
-export const addData = async (data, collection) => {
+export const addData = async (data, dbName, collection) => {
   try {
     await client.connect();
 
     const { insertedId } = await client
-      .db("ecommerce-site-demo")
+      .db(dbName)
       .collection(collection)
       .insertOne(data);
 
@@ -30,12 +27,12 @@ export const addData = async (data, collection) => {
   }
 };
 
-export const deleteData = async (dataId, collection) => {
+export const deleteData = async (dataId, dbName, collection) => {
   try {
     await client.connect();
 
     await client
-      .db("ecommerce-site-demo")
+      .db(dbName)
       .collection(collection)
       .deleteOne({ _id: ObjectID(dataId) });
   } catch (e) {
@@ -43,12 +40,12 @@ export const deleteData = async (dataId, collection) => {
   }
 };
 
-export const updateData = async (target, data, collection) => {
+export const updateData = async (target, data, dbName, collection) => {
   try {
     await client.connect();
 
     await client
-      .db("ecommerce-site-demo")
+      .db(dbName)
       .collection(collection)
       .updateOne({ _id: ObjectID(target) }, { $set: { ...data } });
   } catch (e) {

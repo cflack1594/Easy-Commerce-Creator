@@ -8,12 +8,12 @@ router.get("/test", (_, res) => {
 });
 
 router.get("/auth", async (_, res) => {
-  res.json(await getCollection("sample-auth"));
+  res.json(await getCollection("ecommerce-site-demo", "auth"));
 });
 
 router.post("/auth", async (req, res) => {
   try {
-    res.send(await addData(req.body, "sample-auth"));
+    res.send(await addData(req.body, "ecommerce-site-demo", "auth"));
   } catch (e) {
     throw Error(e);
   }

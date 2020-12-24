@@ -8,12 +8,12 @@ router.get("/test", (_, res) => {
 });
 
 router.get("/sales", async (_, res) => {
-  res.json(await getCollection("sample-sales"));
+  res.json(await getCollection("ecommerce-site-demo", "sales"));
 });
 
 router.post("/sales", async (req, res) => {
   try {
-    res.send(await addData(req.body, "sample-sales"));
+    res.send(await addData(req.body, "ecommerce-site-demo", "sales"));
   } catch (e) {
     throw Error(e);
   }
@@ -25,7 +25,8 @@ router.patch("/sales", async (req, res) => {
       await updateData(
         req.body._id,
         { completed: req.body.completed },
-        "sample-sales"
+        "ecommerce-site-demo",
+        "sales"
       )
     );
   } catch (e) {
