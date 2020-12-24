@@ -5,11 +5,16 @@ export class Home extends React.Component {
 
   static propTypes = {
     setActiveLink: PropTypes.func,
+    //createdSiteDbList
   };
 
   componentDidMount() {
     this.props.setActiveLink(window.location.href);
   }
+
+  createSiteList = () => {
+    return <li>Site created with Easy Commerce Creator</li>;
+  };
 
   render() {
     return (
@@ -18,6 +23,7 @@ export class Home extends React.Component {
           <h1 className="container title is-1  has-text-primary-light">
             {this.heading}
           </h1>
+          <ul>{this.createSiteList()}</ul>
         </div>
       </div>
     );
